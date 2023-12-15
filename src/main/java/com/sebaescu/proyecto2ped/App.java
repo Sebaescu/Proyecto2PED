@@ -123,12 +123,18 @@ public class App extends Application {
 
         // Verifica si hay un ganador
         if (checkWinner()) {
+            // Cambia al jugador que gano
+            currentPlayer = (currentPlayer == PLAYER_X) ? PLAYER_O : PLAYER_X;
             // Muestra un mensaje de victoria
-            mostrarMensaje("¡El jugador " + currentPlayer + " ha ganado!");
-            
+            mostrarMensaje("¡El jugador " + currentPlayer + " ha ganado!");      
+        }
+        if (checkDraw()) {
+            // Cambia al jugador que gano
+            // Muestra un mensaje de victoria
+            mostrarMensaje("Nadie ganó!");      
         }
     }
-
+    
     private boolean checkWinner() {
         // Verifica si hay tres fichas del mismo jugador en una fila
         for (int i = 0; i < GRID_SIZE; i++) {
@@ -152,10 +158,29 @@ public class App extends Application {
 
         return board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '\0';
     }
+    boolean checkDraw() {
+        // Verifica si todos los cuadrados están marcados
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if (board[i][j] == '\0') {
+                    return false;
+                }
+            }
+        }
+        // Verifica si hay un ganador
+        // Si no hay ganador y todos los cuadrados están marcados, entonces hay un empate
+
+        return !checkWinner();
+    }
     private void mostrarMensaje(String mensaje) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("¡Ganaste!");
+            if (checkDraw()) {
+                alert.setTitle("¡Empate!");     
+            }
+            if (checkWinner()) {
+                alert.setTitle("¡Ganaste!");     
+            }
             alert.setHeaderText(null);
             alert.setContentText(mensaje);
             alert.setOnHidden(event -> volverAlMenu());
