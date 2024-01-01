@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsJugadorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsJugadorController">
    <children>
       <FlowPane layoutX="107.0" layoutY="104.0" prefHeight="282.0" prefWidth="227.0">
          <children>
@@ -27,9 +27,10 @@
             <Font size="39.0" />
          </font>
       </Text>
-      <Button layoutX="274.0" layoutY="361.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
+      <Button layoutX="221.0" layoutY="374.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
       <Label fx:id="lbjugador1" layoutX="411.0" layoutY="129.0" text="Jugador X" />
       <Label layoutX="483.0" layoutY="129.0" text="VS" />
       <Label fx:id="lbjugador2" layoutX="519.0" layoutY="129.0" text="Jugador O" />
+      <Button fx:id="btnQuit" layoutX="307.0" layoutY="374.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="55.0" text="Quit" />
    </children>
 </AnchorPane>

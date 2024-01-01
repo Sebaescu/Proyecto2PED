@@ -8,12 +8,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -48,11 +50,14 @@ public class VsJugadorController implements Initializable {
 
     @FXML
     private Button button9;
+    @FXML
+    private Button btnQuit;
 
     @FXML
     private Text winnerText;
 
     private int playerTurn = 0;
+    private boolean gameWon = false;
 
     ArrayList<Button> buttons;
     @FXML
@@ -63,11 +68,15 @@ public class VsJugadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
 
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
+        });
+        btnQuit.setOnAction(event -> {
+            volverAlMenu();
         });
     }
 
@@ -81,7 +90,15 @@ public class VsJugadorController implements Initializable {
         button.setDisable(false);
         button.setText("");
     }
-
+    @FXML
+    private void volverAlMenu() {
+        Platform.runLater(() -> {
+            // Crea una nueva instancia del MainMenu y muestra la ventana maximizada
+            MenuPrincipalController menuPrincipal = new MenuPrincipalController();
+            Stage stage = (Stage) button1.getScene().getWindow();
+            menuPrincipal.mostrarMenuPrincipal(stage);
+        });
+    }
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
@@ -116,14 +133,23 @@ public class VsJugadorController implements Initializable {
 
             //X winner
             if (line.equals("XXX")) {
+                gameWon = true;
                 winnerText.setText("X won!");
             }
 
             //O winner
             else if (line.equals("OOO")) {
+                gameWon = true;
                 winnerText.setText("O won!");
             }
+            // Verificar empate
+            if (!gameWon && allButtonsDisabled()) {
+                winnerText.setText("Empate!");
+            }
         }
+    }
+    private boolean allButtonsDisabled() {
+        return buttons.stream().allMatch(button -> button.isDisabled());
     }
     
 }

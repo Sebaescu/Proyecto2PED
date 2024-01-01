@@ -86,5 +86,20 @@ public class MenuPrincipalController implements Initializable {
         Stage stage = (Stage) btcerrar.getScene().getWindow();
         stage.close();
     }
+    @FXML
+    public void mostrarMenuPrincipal(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipal.fxml"));
+            Parent root = loader.load();
+
+            MenuPrincipalController menuPrincipalController = loader.getController();
+            menuPrincipalController.setPrimaryStage(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
