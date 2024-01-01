@@ -31,6 +31,6 @@
       <Label fx:id="lbjugador1" layoutX="411.0" layoutY="129.0" text="Jugador X" />
       <Label layoutX="483.0" layoutY="129.0" text="VS" />
       <Label fx:id="lbjugador2" layoutX="519.0" layoutY="129.0" text="Jugador O" />
-      <Button fx:id="btnQuit" layoutX="307.0" layoutY="374.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="55.0" text="Quit" />
+      <Button layoutX="307.0" layoutY="374.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="55.0" text="Quit" />
    </children>
 </AnchorPane>

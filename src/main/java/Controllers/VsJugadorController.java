@@ -51,9 +51,6 @@ public class VsJugadorController implements Initializable {
     @FXML
     private Button button9;
     @FXML
-    private Button btnQuit;
-
-    @FXML
     private Text winnerText;
 
     private int playerTurn = 0;
@@ -74,9 +71,6 @@ public class VsJugadorController implements Initializable {
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
-        });
-        btnQuit.setOnAction(event -> {
-            volverAlMenu();
         });
     }
 

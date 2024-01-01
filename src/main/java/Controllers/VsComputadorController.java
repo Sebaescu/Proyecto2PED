@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 public class VsComputadorController implements Initializable {
 
@@ -67,7 +69,15 @@ public class VsComputadorController implements Initializable {
         button.setDisable(false);
         button.setText("");
     }
-
+    @FXML
+    private void volverAlMenu() {
+        Platform.runLater(() -> {
+            // Crea una nueva instancia del MainMenu y muestra la ventana maximizada
+            MenuPrincipalController menuPrincipal = new MenuPrincipalController();
+            Stage stage = (Stage) button1.getScene().getWindow();
+            menuPrincipal.mostrarMenuPrincipal(stage);
+        });
+    }
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             button.setText("O");
