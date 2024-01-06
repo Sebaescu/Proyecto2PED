@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.arboles;
+
+import tictactoe.AdversarialSearchTicTacToe;
+
 
 /**
  *
@@ -10,15 +9,19 @@ package com.mycompany.arboles;
  */
 public class NaryTree<E> {
     private TreeNode<E> root;
-
-    public NaryTree(E rootData) {
-        this.root = new TreeNode<>(rootData);
+    
+    public NaryTree() {
+        this.root = new TreeNode();
     }
 
     public TreeNode<E> getRoot() {
         return root;
     }
 
+    public boolean isEmpty () {
+        return this.root == null;
+    }
+    
     public int getHeight() {
         return getHeight(root);
     }
@@ -129,5 +132,29 @@ public class NaryTree<E> {
             node.setContent(newData);
         }
     }
+    
+     public void buildTree(TreeNode node, boolean isComputerTurn) {
+        if (node == null || node.isTerminal()) {
+            return;
+        }
+
+        // Calcular el jugador actual
+        int currentPlayer = isComputerTurn ? 1 : -1;
+
+        // Crear todos los posibles estados
+        for (int i = 0; i < 9; i++) {
+            if (node.getBoard()[i] == 0) {  // Verificar si la casilla está vacía
+                TreeNode childNode = new TreeNode();
+                childNode.setMejorMovimiento(i);
+                childNode.setMiTurno(!node.isMiTurno());  // Cambiar el turno
+                childNode.getBoard()[i] = currentPlayer;
+                node.addChild(childNode);
+
+                // Recursión para construir el árbol
+                buildTree(childNode, !isComputerTurn);
+            }
+        }
+    }
+
 
 }

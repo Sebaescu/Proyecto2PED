@@ -1,8 +1,11 @@
 package tictactoe;
+import com.mycompany.arboles.NaryTree;
 import java.util.ArrayList;
+import com.mycompany.arboles.TreeNode;
 
 public class AdversarialSearchTicTacToe {
-
+    
+    
     public int minMaxDecision(State state){
         ArrayList<State> possibleMoves = successorsOf(state);
         ArrayList<Integer> movesList = new ArrayList<>();
@@ -57,7 +60,7 @@ public class AdversarialSearchTicTacToe {
     public boolean isTerminal(State state) {
         int takenSpots = 0;
         for (int a = 0; a < 9; a++) {
-            if(state.getStateIndex(a).equals("X") || state.getStateIndex(a).equals("O") ){
+            if(state.getStateIndex(a).equals("X") || state.getStateIndex(a).equals("O") ){ 
                 takenSpots++;
             }
 
@@ -96,6 +99,9 @@ public class AdversarialSearchTicTacToe {
     //Find any win state if it exists
    //Find any win state if it exists
     private String checkState(State state, int a) {
+        if (state == null) {
+            return "";
+        }
         return switch (a) {
             case 0 -> state.getStateIndex(0) + state.getStateIndex(1) + state.getStateIndex(2);
             case 1 -> state.getStateIndex(3) + state.getStateIndex(4) + state.getStateIndex(5);
@@ -118,10 +124,12 @@ public class AdversarialSearchTicTacToe {
 
         //Calculate player turn
         for (String s: state.getState()) {
-            if (s.equals("X")) {
-                xMoves++;
-            }else if(s.equals("O")){
-                yMoves++;
+            if(s!=null){
+                if (s.equals("X")) {
+                    xMoves++;
+                }else if(s.equals("O")){
+                    yMoves++;
+                }
             }
         }
 
@@ -142,4 +150,5 @@ public class AdversarialSearchTicTacToe {
         }
         return possibleMoves;
     }
+    
 }

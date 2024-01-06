@@ -1,5 +1,6 @@
 package Controllers;
 
+import com.mycompany.arboles.TreeNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,6 +52,8 @@ public class VsComputadorController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
 
+        makeAIMove();
+        
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
@@ -88,6 +91,7 @@ public class VsComputadorController implements Initializable {
     }
 
     public void makeAIMove(){
+        
         int move = ticTacToeAI.minMaxDecision(getBoardState());
         pickButton(move);
     }
