@@ -1,29 +1,38 @@
 package Controllers;
 
-import com.mycompany.arboles.TreeNode;
+import TDAs.TreeNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import tictactoe.AdversarialSearchTicTacToe;
+import tictactoe.MinMax;
 import tictactoe.State;
-
+import javafx.util.Duration;
 import java.net.URL;
+//import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
+import static Controllers.CustomController.player1Begin;
+import static Controllers.CustomController.CPUBegin;
+
 public class VsComputadorController implements Initializable {
-
+    
+    int contPlayer1 = 0;
+    int contCPU = 0;
     Random random = new Random();
-
     ArrayList<Button> buttons;
-
-    AdversarialSearchTicTacToe ticTacToeAI = new AdversarialSearchTicTacToe();
+    MinMax ticTacToeAI = new MinMax();
+    public boolean playerTurn = true;
 
     @FXML
     private Button button1;
@@ -45,11 +54,24 @@ public class VsComputadorController implements Initializable {
     private Button button9;
     @FXML
     private Text winnerText;
+    @FXML
+    private FlowPane PaneTableroIA;
+    @FXML
+    private Label lbTitulo;
+    @FXML
+    private Label lbresult;
+    @FXML
+    private TextField txscoreP1;
+    @FXML
+    private TextField txscoreCPU;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txscoreP1.setText(String.valueOf(contPlayer1));
+        txscoreCPU.setText(String.valueOf(contCPU));
+        
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
 
         makeAIMove();
@@ -60,11 +82,13 @@ public class VsComputadorController implements Initializable {
         });
     }
 
+
     @FXML
     void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
         winnerText.setText("Tic-Tac-Toe");
         pickButton(random.nextInt(9));
+        
     }
 
 
@@ -81,12 +105,19 @@ public class VsComputadorController implements Initializable {
             menuPrincipal.mostrarMenuPrincipal(stage);
         });
     }
+
     private void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
             button.setText("O");
             button.setDisable(true);
-            makeAIMove();
-            checkIfGameIsOver();
+
+            // Agrega un retraso antes de que la computadora realice su movimiento
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                makeAIMove();
+                checkIfGameIsOver();
+            });
+            pause.play();
         });
     }
 
@@ -112,6 +143,9 @@ public class VsComputadorController implements Initializable {
     }
 
     public void checkIfGameIsOver(){
+        
+        boolean isGameOver = false;
+        
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -127,13 +161,34 @@ public class VsComputadorController implements Initializable {
 
             //X winner
             if (line.equals("XXX")) {
-                winnerText.setText("AI won!");
+                winnerText.setText("Computadora Gana!");
+                contCPU++;
+                txscoreCPU.setText(String.valueOf(contCPU));
+                
+                
+                
             }
 
             //O winner
             else if (line.equals("OOO")) {
-                winnerText.setText("You won!");
+                winnerText.setText("Player 1 Gana!");
+                contPlayer1++;
+                txscoreP1.setText(String.valueOf(contPlayer1));
+            }
+
+        }
+
+        if (!isGameOver && isBoardFull()) {
+            winnerText.setText("Empate");
+        }
+    }
+
+    public boolean isBoardFull() {
+        for (Button button : buttons) {
+            if (button.getText().isEmpty()) {
+                return false; 
             }
         }
+        return true;
     }
 }

@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  */
 public class MenuPrincipalController implements Initializable {
     
-    public Stage primaryStage;
+    public static Stage primaryStage;
     @FXML
     private AnchorPane paneMenu;
     @FXML
@@ -49,11 +49,11 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void abrirVScomputador(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VsComputador.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Custom.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador del VsComputador.fxml
-            VsComputadorController vsComputadorController = loader.getController();
+            //VsComputadorController vsComputadorController = loader.getController();
             setPrimaryStage(primaryStage);
 
             Scene scene = new Scene(root);

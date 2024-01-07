@@ -1,59 +1,88 @@
 package tictactoe;
-import com.mycompany.arboles.NaryTree;
+import TDAs.NaryTree;
 import java.util.ArrayList;
-import com.mycompany.arboles.TreeNode;
+import TDAs.TreeNode;
 
-public class AdversarialSearchTicTacToe {
+public class MinMax {
     
     
-    public int minMaxDecision(State state){
-        ArrayList<State> possibleMoves = successorsOf(state);
+    public int minMaxDecision(State state) {
+        NaryTree gameTree = buildGameTree(state);
+        TreeNode rootNode = gameTree.getRoot();
+
+        ArrayList<TreeNode> possibleMoves = rootNode.getChildren();
         ArrayList<Integer> movesList = new ArrayList<>();
 
-
-        for (State states: possibleMoves) {
-            movesList.add(minValue(states));
+        for (TreeNode node : possibleMoves) {
+            movesList.add(minValue(node));
         }
 
         int max = movesList.get(0);
         int bestIndex = 0;
 
         for (int i = 1; i < movesList.size(); i++) {
-
-            if( movesList.get(i) > max){
+            if (movesList.get(i) > max) {
                 max = movesList.get(i);
                 bestIndex = i;
             }
         }
-        int action = possibleMoves.get(bestIndex).getPosition();
-        return action;
+        
+        return rootNode.getChildren().get(bestIndex).getState().getPosition();
+        //return rootNode.children.get(bestIndex).state.getPosition();
     }
 
     //Picks best option for the X-player
-    private int maxValue(State state){
-        if (isTerminal(state)){
+    public int maxValue(TreeNode node) {
+        State state = node.getState();
+
+        if (isTerminal(state)) {
             return utilityOf(state);
         }
+
         int v = (int) -Double.POSITIVE_INFINITY;
 
-        for (State possibleMove: successorsOf(state)) {
-            v = Math.max(v, minValue(possibleMove));
+        for (TreeNode child : node.getChildren()) {
+            v = Math.max(v, minValue(child));
         }
+
         return v;
     }
 
     //Picks best option for the O-player
-    private int minValue(State state){
-        if (isTerminal(state)){
+    public int minValue(TreeNode node) {
+        State state = node.getState();
+
+        if (isTerminal(state)) {
             return utilityOf(state);
         }
 
         int v = (int) Double.POSITIVE_INFINITY;
-        for (State possibleMove: successorsOf(state)) {
 
-            v = Math.min(v, maxValue(possibleMove));
+        for (TreeNode child : node.getChildren()) {
+            v = Math.min(v, maxValue(child));
         }
+
         return v;
+    }
+
+    public NaryTree buildGameTree(State state) {
+        NaryTree gameTree = new NaryTree(state);
+        buildTreeRecursively(gameTree.getRoot());
+        return gameTree;
+    }
+
+    public void buildTreeRecursively(TreeNode node) {
+        State state = node.getState();
+
+        if (!isTerminal(state)) {
+            ArrayList<State> successors = successorsOf(state);
+
+            for (State successor : successors) {
+                TreeNode childNode = new TreeNode(successor);
+                node.addChild(childNode);
+                buildTreeRecursively(childNode);
+            }
+        }
     }
 
     //Returns true if the game is over
@@ -96,7 +125,6 @@ public class AdversarialSearchTicTacToe {
         return 0;
     }
 
-    //Find any win state if it exists
    //Find any win state if it exists
     private String checkState(State state, int a) {
         if (state == null) {

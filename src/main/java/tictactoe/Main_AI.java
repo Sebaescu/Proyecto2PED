@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main_AI {
     public static void main(String[] args) {
 
-        AdversarialSearchTicTacToe adsTicTacToe = new AdversarialSearchTicTacToe();
+        MinMax adsTicTacToe = new MinMax();
 
         String[] board = {"0","1","2","3","4","5","6","7","8"};
 
