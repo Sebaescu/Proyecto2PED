@@ -76,8 +76,10 @@ public class CustomController implements Initializable {
         
         if(rdP1.isSelected()){
             player1Begin = true;
+            CPUBegin = false;
         }else{
             CPUBegin = true;
+            player1Begin = false;
         }
         
         try {

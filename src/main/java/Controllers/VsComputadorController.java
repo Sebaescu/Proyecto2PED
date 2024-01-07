@@ -1,6 +1,5 @@
 package Controllers;
 
-import TDAs.TreeNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import tictactoe.MinMax;
 import tictactoe.State;
 import javafx.util.Duration;
 import java.net.URL;
-//import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -22,8 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-import static Controllers.CustomController.player1Begin;
-import static Controllers.CustomController.CPUBegin;
 
 public class VsComputadorController implements Initializable {
     
@@ -32,7 +28,7 @@ public class VsComputadorController implements Initializable {
     Random random = new Random();
     ArrayList<Button> buttons;
     MinMax ticTacToeAI = new MinMax();
-    public boolean playerTurn = true;
+    public boolean playerTurn = true,deshabilitarBtns = false,isGameOver = false;;
 
     @FXML
     private Button button1;
@@ -74,12 +70,13 @@ public class VsComputadorController implements Initializable {
         
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
 
-        makeAIMove();
-        
         buttons.forEach(button ->{
             setupButton(button);
             button.setFocusTraversable(false);
         });
+        if(CustomController.CPUBegin){
+            makeAIMove();
+        }  
     }
 
 
@@ -87,8 +84,11 @@ public class VsComputadorController implements Initializable {
     void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
         winnerText.setText("Tic-Tac-Toe");
-        pickButton(random.nextInt(9));
-        
+        deshabilitarBtns = false;
+        isGameOver = false;
+        if(CustomController.CPUBegin){
+            makeAIMove();
+        }      
     }
 
 
@@ -112,10 +112,14 @@ public class VsComputadorController implements Initializable {
             button.setDisable(true);
 
             // Agrega un retraso antes de que la computadora realice su movimiento
-            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
             pause.setOnFinished(event -> {
-                makeAIMove();
-                checkIfGameIsOver();
+                checkIfGameIsOver(); 
+                if(!isGameOver){
+                    makeAIMove();
+                    checkIfGameIsOver(); 
+                }
+                       
             });
             pause.play();
         });
@@ -143,9 +147,7 @@ public class VsComputadorController implements Initializable {
     }
 
     public void checkIfGameIsOver(){
-        
-        boolean isGameOver = false;
-        
+  
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -164,9 +166,7 @@ public class VsComputadorController implements Initializable {
                 winnerText.setText("Computadora Gana!");
                 contCPU++;
                 txscoreCPU.setText(String.valueOf(contCPU));
-                
-                
-                
+                deshabilitarBtns = true;              
             }
 
             //O winner
@@ -174,12 +174,20 @@ public class VsComputadorController implements Initializable {
                 winnerText.setText("Player 1 Gana!");
                 contPlayer1++;
                 txscoreP1.setText(String.valueOf(contPlayer1));
+                deshabilitarBtns = true;   
             }
 
         }
 
         if (!isGameOver && isBoardFull()) {
             winnerText.setText("Empate");
+            deshabilitarBtns = true;   
+        }
+        if(deshabilitarBtns){
+            isGameOver = true;
+            buttons.forEach(button ->{
+                button.setDisable(true);
+            });
         }
     }
 
