@@ -1,5 +1,6 @@
 package Controllers;
 
+import static Controllers.CustomController.player1Begin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +29,7 @@ public class VsComputadorController implements Initializable {
     Random random = new Random();
     ArrayList<Button> buttons;
     MinMax ticTacToeAI = new MinMax();
-    public boolean playerTurn = true,deshabilitarBtns = false,isGameOver = false;;
+    public boolean playerTurn = true,deshabilitarBtns = false,isGameOver = false;
 
     @FXML
     private Button button1;
@@ -76,19 +77,33 @@ public class VsComputadorController implements Initializable {
         });
         if(CustomController.CPUBegin){
             makeAIMove();
-        }  
-    }
+        } 
 
+    }
 
     @FXML
     void restartGame(ActionEvent event) {
-        buttons.forEach(this::resetButton);
-        winnerText.setText("Tic-Tac-Toe");
-        deshabilitarBtns = false;
-        isGameOver = false;
-        if(CustomController.CPUBegin){
-            makeAIMove();
-        }      
+        if (CustomController.CPUBegin) {
+            buttons.forEach(this::resetButton);
+            winnerText.setText("Tic-Tac-Toe");
+            deshabilitarBtns = false;
+            isGameOver = false;
+            pickButton(random.nextInt(9));
+        } else if (CustomController.player1Begin){
+            buttons.forEach(this::resetButton);
+            winnerText.setText("Tic-Tac-Toe");
+            deshabilitarBtns = false;
+            isGameOver = false;
+        }
+        
+//        buttons.forEach(this::resetButton);
+//        winnerText.setText("Tic-Tac-Toe");
+//        deshabilitarBtns = false;
+//        isGameOver = false;
+//        pickButton(random.nextInt(9));
+//        if(CustomController.CPUBegin){
+//            makeAIMove();
+//        }      
     }
 
 
@@ -131,7 +146,7 @@ public class VsComputadorController implements Initializable {
         pickButton(move);
     }
 
-    private void pickButton(int index) {
+    public void pickButton(int index) {
         buttons.get(index).setText("X");
         buttons.get(index).setDisable(true);
     }
@@ -147,9 +162,9 @@ public class VsComputadorController implements Initializable {
     }
 
     public void checkIfGameIsOver(){
-  
+        String line = null;
         for (int a = 0; a < 8; a++) {
-            String line = switch (a) {
+            line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
                 case 1 -> button4.getText() + button5.getText() + button6.getText();
                 case 2 -> button7.getText() + button8.getText() + button9.getText();
@@ -161,7 +176,6 @@ public class VsComputadorController implements Initializable {
                 default -> null;
             };
 
-            //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("Computadora Gana!");
                 contCPU++;
@@ -169,7 +183,6 @@ public class VsComputadorController implements Initializable {
                 deshabilitarBtns = true;              
             }
 
-            //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("Player 1 Gana!");
                 contPlayer1++;
@@ -178,11 +191,39 @@ public class VsComputadorController implements Initializable {
             }
 
         }
-
+        
+        // esta manera junto con lo de abajo funcionan de la misma forma 
+        // pero se presenta ese problema que indique en el video
         if (!isGameOver && isBoardFull()) {
-            winnerText.setText("Empate");
-            deshabilitarBtns = true;   
+            switch (line) {
+                case "XXX":
+                    winnerText.setText("Computadora Gana!");
+                    break;
+                case "OOO":
+                    winnerText.setText("Player 1 Gana!");
+                    break;
+                default:
+                    winnerText.setText("Empate");
+                    deshabilitarBtns = true;
+                    break;
+            }
+
         }
+    
+//        if (!isGameOver && isBoardFull()) {
+//            if (line.equals("XXX")) {
+//                winnerText.setText("Computadora Gana!");          
+//            }
+//            else if (line.equals("OOO")) {
+//                winnerText.setText("Player 1 Gana!");
+//  
+//            }else{
+//                winnerText.setText("Empate");
+//                deshabilitarBtns = true;
+//            }
+//              
+//        }
+        
         if(deshabilitarBtns){
             isGameOver = true;
             buttons.forEach(button ->{
