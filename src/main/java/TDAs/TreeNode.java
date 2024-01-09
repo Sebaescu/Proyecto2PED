@@ -5,14 +5,8 @@
 package TDAs;
 
 import java.util.ArrayList;
-import java.util.List;
-import tictactoe.MinMax;
 import tictactoe.State;
 
-/**
- *
- * @author Abeni
- */
 public class TreeNode {
 
     private State state;

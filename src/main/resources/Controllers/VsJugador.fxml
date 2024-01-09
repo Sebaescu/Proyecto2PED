@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
@@ -32,5 +33,7 @@
       <Label layoutX="483.0" layoutY="129.0" text="VS" />
       <Label fx:id="lbjugador2" layoutX="519.0" layoutY="129.0" text="Jugador O" />
       <Button layoutX="307.0" layoutY="374.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="55.0" text="Quit" />
+      <TextField fx:id="txscoreP1" layoutX="416.0" layoutY="162.0" prefHeight="25.0" prefWidth="44.0" />
+      <TextField fx:id="txscoreP2" layoutX="525.0" layoutY="162.0" prefHeight="25.0" prefWidth="44.0" />
    </children>
 </AnchorPane>

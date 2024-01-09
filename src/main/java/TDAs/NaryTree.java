@@ -3,11 +3,6 @@ package TDAs;
 import tictactoe.MinMax;
 import tictactoe.State;
 
-
-/**
- *
- * @author Abeni
- */
 public class NaryTree {
 
     private TreeNode root;

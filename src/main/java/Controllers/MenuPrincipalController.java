@@ -80,6 +80,20 @@ public class MenuPrincipalController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void abrirCpuVsCpu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CpuVsCpu.fxml"));
+            Parent root = loader.load();
+
+            setPrimaryStage(primaryStage);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void salirJuego(ActionEvent event) {

@@ -5,12 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="paneMenu" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="Controllers.MenuPrincipalController">
+<AnchorPane id="AnchorPane" fx:id="paneMenu" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuPrincipalController">
    <children>
       <Button fx:id="btCPU" alignment="CENTER" layoutX="247.0" layoutY="174.0" mnemonicParsing="false" onAction="#abrirVScomputador" prefHeight="26.0" prefWidth="106.0" text="Vs Computadora" />
       <Button fx:id="btjugador" alignment="CENTER" layoutX="250.0" layoutY="221.0" mnemonicParsing="false" onAction="#abrirVSjugador" prefHeight="26.0" prefWidth="106.0" text="Vs Jugador" />
-      <Button fx:id="btcerrar" alignment="CENTER" layoutX="250.0" layoutY="269.0" mnemonicParsing="false" onAction="#salirJuego" prefHeight="26.0" prefWidth="106.0" text="Salir del Juego" />
+      <Button fx:id="btcerrar" alignment="CENTER" layoutX="250.0" layoutY="312.0" mnemonicParsing="false" onAction="#salirJuego" prefHeight="26.0" prefWidth="106.0" text="Salir del Juego" />
       <Label layoutX="101.0" layoutY="31.0" text="Bienvenido al Tic Tac Tou">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -21,5 +20,6 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="btnCpu" alignment="CENTER" layoutX="250.0" layoutY="266.0" mnemonicParsing="false" onAction="#abrirCpuVsCpu" prefHeight="26.0" prefWidth="106.0" text="CPU Vs CPU" />
    </children>
 </AnchorPane>

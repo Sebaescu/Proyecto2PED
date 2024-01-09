@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -55,12 +56,15 @@ public class VsJugadorController implements Initializable {
 
     private int playerTurn = 0;
     private boolean gameWon = false;
-
+    int contP1 = 0;
+    int contP2 = 0;
     ArrayList<Button> buttons;
     @FXML
     private Label lbjugador1;
     @FXML
     private Label lbjugador2;
+    @FXML
+    private TextField txscoreP1,txscoreP2;
 
 
     @Override
@@ -72,6 +76,8 @@ public class VsJugadorController implements Initializable {
             setupButton(button);
             button.setFocusTraversable(false);
         });
+        txscoreP1.setText(String.valueOf(contP1));
+        txscoreP2.setText(String.valueOf(contP2));
     }
 
     @FXML
@@ -129,15 +135,19 @@ public class VsJugadorController implements Initializable {
             if (line.equals("XXX")) {
                 gameWon = true;
                 winnerText.setText("X won!");
+                contP1++;
+                txscoreP1.setText(String.valueOf(contP1));
             }
 
             //O winner
             else if (line.equals("OOO")) {
                 gameWon = true;
                 winnerText.setText("O won!");
+                contP2++;
+                txscoreP2.setText(String.valueOf(contP2));
             }
             // Verificar empate
-            if (!gameWon && allButtonsDisabled()) {
+            if (gameWon == false && allButtonsDisabled()) {
                 winnerText.setText("Empate!");
             }
         }

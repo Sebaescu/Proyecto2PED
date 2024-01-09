@@ -23,17 +23,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Abeni
- */
 public class CustomController implements Initializable {
 
     public static RadioButton rdP1 = new RadioButton("Player 1");
     public static RadioButton rdCPU = new RadioButton("Computador");
-    public static boolean player1Begin = false;
-    public static boolean CPUBegin = false;
+    public static RadioButton rdCirculo = new RadioButton("Circulo");
+    public static RadioButton rdCruz = new RadioButton("Cruz");
+    public static boolean player1Begin = false,CPUBegin = false;
+    public static boolean esCirculo = false;
 
     
     @FXML
@@ -51,14 +48,11 @@ public class CustomController implements Initializable {
     @FXML
     private Button btIniciar;
     @FXML
-    private HBox hbradioButton;
+    private HBox hbradioButton,hbOpciones;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ponerBotones();
+        ponerBotones();      
     }    
 
     @FXML
@@ -81,7 +75,11 @@ public class CustomController implements Initializable {
             CPUBegin = true;
             player1Begin = false;
         }
-        
+        if(rdCirculo.isSelected()){
+            esCirculo = true;
+        }else{
+            esCirculo = false;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("VsComputador.fxml"));
             Parent root = loader.load();
@@ -100,7 +98,11 @@ public class CustomController implements Initializable {
         
         hbradioButton.getChildren().addAll(rdP1,rdCPU);
         hbradioButton.setSpacing(20);
-       
+        ToggleGroup selectOpcion = new ToggleGroup();
+        rdCirculo.setToggleGroup(selectOpcion);
+        rdCruz.setToggleGroup(selectOpcion);
+        hbOpciones.getChildren().addAll(rdCirculo,rdCruz);
+        hbOpciones.setSpacing(65);
     }
 
 

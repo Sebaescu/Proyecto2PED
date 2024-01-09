@@ -1,7 +1,7 @@
 package tictactoe;
 import TDAs.NaryTree;
-import java.util.ArrayList;
 import TDAs.TreeNode;
+import java.util.ArrayList;
 
 public class MinMax {
     
@@ -13,8 +13,12 @@ public class MinMax {
         ArrayList<TreeNode> possibleMoves = rootNode.getChildren();
         ArrayList<Integer> movesList = new ArrayList<>();
 
+        String player = getCurrentPlayer(state);
+
         for (TreeNode node : possibleMoves) {
-            movesList.add(minValue(node));
+            State nextState = node.getState();
+            int utility = (player.equals("X")) ? maxValue(node) : minValue(node);
+            movesList.add(utility);
         }
 
         int max = movesList.get(0);
@@ -26,10 +30,25 @@ public class MinMax {
                 bestIndex = i;
             }
         }
-        
+
         return rootNode.getChildren().get(bestIndex).getState().getPosition();
-        //return rootNode.children.get(bestIndex).state.getPosition();
     }
+
+    private String getCurrentPlayer(State state) {
+        int xCount = 0;
+        int oCount = 0;
+
+        for (String s : state.getState()) {
+            if ("X".equals(s)) {
+                xCount++;
+            } else if ("O".equals(s)) {
+                oCount++;
+            }
+        }
+
+        return (xCount <= oCount) ? "X" : "O";
+    }
+
 
     //Picks best option for the X-player
     public int maxValue(TreeNode node) {

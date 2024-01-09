@@ -23,7 +23,7 @@ public class State {
         return state;
     }
 
-    public String getStateIndex(int i){
+    public String getStateIndex(int i) {
         return state[i];
     }
 
@@ -31,8 +31,17 @@ public class State {
         this.state = state;
     }
 
-    public void changeState(int i, String player){
+    public void changeState(int i, String player) {
         state[i] = player;
+    }
+
+    public boolean isEmptyBoard() {
+        for (String s : state) {
+            if (s != null && !s.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

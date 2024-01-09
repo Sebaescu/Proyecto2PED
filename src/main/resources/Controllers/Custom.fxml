@@ -8,31 +8,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="PaneCustom" prefHeight="445.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="Controllers.CustomController">
+<AnchorPane id="AnchorPane" fx:id="PaneCustom" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomController">
    <children>
       <Button fx:id="btHome" layoutX="30.0" layoutY="21.0" mnemonicParsing="false" onAction="#volverInicio" text="Menu" />
-      <Label layoutX="275.0" layoutY="223.0" text="VS">
+      <Label layoutX="275.0" layoutY="145.0" text="VS">
          <font>
             <Font name="Berlin Sans FB Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="lbplayer1" layoutX="135.0" layoutY="275.0" text="Player 1">
+      <Label fx:id="lbplayer1" layoutX="125.0" layoutY="162.0" text="Player 1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbcomputador" layoutX="382.0" layoutY="275.0" text="Computador">
+      <Label fx:id="lbcomputador" layoutX="394.0" layoutY="162.0" text="Computador">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgplayer1" fitHeight="60.0" fitWidth="66.0" layoutX="144.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgplayer1" fitHeight="60.0" fitWidth="66.0" layoutX="312.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/circulo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgCPU" fitHeight="60.0" fitWidth="66.0" layoutX="414.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgCPU" fitHeight="60.0" fitWidth="66.0" layoutX="435.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/letra-x.png" />
          </image>
@@ -48,5 +47,11 @@
          </font>
       </Label>
       <HBox fx:id="hbradioButton" alignment="CENTER_LEFT" layoutX="261.0" layoutY="96.0" prefHeight="35.0" prefWidth="289.0" />
+      <Label layoutX="108.0" layoutY="231.0" text="¿Cual te gustaria ser?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hbOpciones" layoutX="335.0" layoutY="287.0" prefHeight="25.0" prefWidth="200.0" spacing="65.0" />
    </children>
 </AnchorPane>
