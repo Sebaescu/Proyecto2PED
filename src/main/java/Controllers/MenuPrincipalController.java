@@ -32,6 +32,8 @@ public class MenuPrincipalController implements Initializable {
     private Button btjugador;
     @FXML
     private Button btcerrar;
+    @FXML
+    private Button btnCpu;
     
 
     /**
@@ -93,7 +95,6 @@ public class MenuPrincipalController implements Initializable {
         Stage stage = (Stage) btcerrar.getScene().getWindow();
         stage.close();
     }
-    @FXML
     public void mostrarMenuPrincipal(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipal.fxml"));

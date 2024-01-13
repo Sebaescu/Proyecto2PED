@@ -1,5 +1,39 @@
-.button:disabled{
+/*.button:disabled{
     -fx-background-color: #ababab;
     -fx-text-fill: black;
     -fx-font-size: 34px;
+}*/
+.vsComputadora {
+    -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
+    -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
+}
+.vsComputadora:hover {
+    -fx-background-color: FFDFA8; /* Color de fondo cuando el ratón está sobre el botón */
+}
+.vsJugador {
+    -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
+    -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
+}
+.vsJugador:hover {
+    -fx-background-color: FFDFA8; /* Color de fondo cuando el ratón está sobre el botón */
+}
+.CPUvsCPU {
+    -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
+    -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
+}
+.CPUvsCPU:hover {
+    -fx-background-color: FFDFA8; /* Color de fondo cuando el ratón está sobre el botón */
+}
+.salirDelJuego {
+    -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
+    -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
+}
+.salirDelJuego:hover {
+    -fx-background-color: FFDFA8; /* Color de fondo cuando el ratón está sobre el botón */
+}
+.FondoMenuPrincipal{
+    -fx-background-image: url("Fondo2.gif");
+    -fx-background-size:600px 400px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }
