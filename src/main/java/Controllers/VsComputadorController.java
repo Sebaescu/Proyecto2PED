@@ -136,7 +136,6 @@ public class VsComputadorController implements Initializable {
                         makeAIMove();
                         checkIfGameIsOver();
                     }
-
                 });
                 pause.play();
             });

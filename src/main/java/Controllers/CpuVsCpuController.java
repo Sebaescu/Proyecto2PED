@@ -104,8 +104,10 @@ public class CpuVsCpuController implements Initializable {
     }
 
     public void pickButton(int index) {
-        buttons.get(index).setText(playerTurn % 2 == 0 ? "X" : "O");
-        buttons.get(index).setDisable(false); // PILAS AQUI LE CAMBIE EL TRUE POR FALSE
+        if (index >= 0 && index < buttons.size()) {
+            buttons.get(index).setText(playerTurn % 2 == 0 ? "X" : "O");
+            buttons.get(index).setDisable(false); // PILAS AQUI LE CAMBIE EL TRUE POR FALSE
+        }
     }
 
     public State getBoardState() {
@@ -146,19 +148,9 @@ public class CpuVsCpuController implements Initializable {
                 txtscoreCPU2.setText(String.valueOf(contCPU2));                
                 deshabilitarBtns = true;
             }
-        }
-
-        if (isGameOver && isBoardFull()) {
-            switch (line) {
-                case "XXX":
-                    winnerText.setText("Computadora 1 Gana!");
-                    break;
-                case "OOO":
-                    winnerText.setText("Computadora 2 Gana!");
-                    break;
-                default:
-                    winnerText.setText("Empate");
-                    break;
+            if(isGameOver == false && isBoardFull()){
+                winnerText.setText("Empate");
+                deshabilitarBtns = true;
             }
         }
 
