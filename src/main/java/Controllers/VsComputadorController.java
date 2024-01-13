@@ -267,7 +267,8 @@ public class VsComputadorController implements Initializable {
 
         return bestMove;
     }
-    private int minimax(boolean isMaximizing, int depth) {
+    
+    public int minimax(boolean isMaximizing, int depth) {
         String result = checkWinner();
         if (result.equals("X")) {
             return -1;
@@ -302,7 +303,7 @@ public class VsComputadorController implements Initializable {
         }
     }
 
-    private String checkWinner() {
+    public String checkWinner() {
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();

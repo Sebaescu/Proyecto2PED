@@ -5,6 +5,8 @@ package Controllers;
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+import static java.lang.Math.random;
+import static java.lang.StrictMath.random;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +71,7 @@ public class CpuVsCpuController implements Initializable {
         buttons.forEach(button -> button.setFocusTraversable(false));
 
         // Inicia el juego entre la computadora y la computadora
+
         makeAIMove();
         txtscoreCPU.setText(String.valueOf(contCPU));
         txtscoreCPU2.setText(String.valueOf(contCPU2));
@@ -83,7 +86,7 @@ public class CpuVsCpuController implements Initializable {
             setPlayerSymbol();
 
             // Agrega un retraso antes de que la siguiente computadora realice su movimiento
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 checkIfGameIsOver();
                 makeAIMove();
@@ -131,14 +134,18 @@ public class CpuVsCpuController implements Initializable {
             };
 
             if (line.equals("XXX")) {
-                winnerText.setText("Computadora Gana!");
+                winnerText.setText("Computadora 1 Gana!");
                 contCPU++;
                 isGameOver = true;
+                txtscoreCPU.setText(String.valueOf(contCPU));
+                txtscoreCPU2.setText(String.valueOf(contCPU2));                
                 deshabilitarBtns = true;
             } else if (line.equals("OOO")) {
-                winnerText.setText("Player 1 Gana!");
+                winnerText.setText("Computadora 2 Gana!");
                 contCPU2++;
                 isGameOver = true;
+                txtscoreCPU.setText(String.valueOf(contCPU));
+                txtscoreCPU2.setText(String.valueOf(contCPU2));                
                 deshabilitarBtns = true;
             }
         }

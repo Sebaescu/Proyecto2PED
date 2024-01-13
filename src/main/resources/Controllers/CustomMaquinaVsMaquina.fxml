@@ -7,27 +7,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="PaneCustom" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomController">
+<AnchorPane id="AnchorPane" fx:id="PaneCustomMvsM" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomMaquinaVsMaquinaController">
    <children>
-      <Button fx:id="btHome" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#volverInicio" text="Menu" />
+      <Button fx:id="btReturn" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#ReturnHome" text="Menu" />
       <Label layoutX="272.0" layoutY="270.0" text="VS">
          <font>
             <Font name="Berlin Sans FB Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="lbplayer1" layoutX="138.0" layoutY="285.0" text="Player 1">
+      <Label fx:id="lbCPU1" layoutX="105.0" layoutY="285.0" text="Maquina 1">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbcomputador" layoutX="381.0" layoutY="285.0" text="Computador">
+      <Label fx:id="lbCPU2" layoutX="381.0" layoutY="285.0" text="Maquina 2">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgplayer1" fitHeight="60.0" fitWidth="66.0" layoutX="159.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCPU" fitHeight="60.0" fitWidth="66.0" layoutX="422.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btIniciar" layoutX="275.0" layoutY="364.0" mnemonicParsing="false" onAction="#comenzarJuego" text="Iniciar">
+      <ImageView fx:id="imgCPU1" fitHeight="60.0" fitWidth="66.0" layoutX="132.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgCPU2" fitHeight="60.0" fitWidth="66.0" layoutX="408.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btGo" layoutX="275.0" layoutY="364.0" mnemonicParsing="false" onAction="#Gogame" text="Iniciar">
          <font>
             <Font size="14.0" />
          </font>

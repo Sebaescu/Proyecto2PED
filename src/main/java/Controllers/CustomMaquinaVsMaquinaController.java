@@ -26,95 +26,104 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class CustomController implements Initializable {
+/**
+ * FXML Controller class
+ *
+ * @author Abeni
+ */
+public class CustomMaquinaVsMaquinaController implements Initializable {
 
-    public static RadioButton rdJugador1 = new RadioButton("Player 1");
-    public static RadioButton rdCPU = new RadioButton("Computador");
-    public static RadioButton rdCirculo = new RadioButton("Circulo");
-    public static RadioButton rdCruz = new RadioButton("Cruz");
-    public static boolean player1Begin = false,CPUBegin = false;
-    public static boolean esCirculo = false;
+    public static RadioButton rdCp1 = new RadioButton("Maquina 1");
+    public static RadioButton rdCp2 = new RadioButton("Maquina 2");
+    public static RadioButton rdCR = new RadioButton("Circulo");
+    public static RadioButton rdCX = new RadioButton("Cruz");
+    public static boolean cp1Begin = false, cp2Begin = false;
+    public static boolean esO = false;    
 
-    
     @FXML
-    private Button btHome;
+    private AnchorPane PaneCustomMvsM;
     @FXML
-    private Label lbplayer1;
+    private Button btReturn;
     @FXML
-    private Label lbcomputador;
+    private Label lbCPU1;
     @FXML
-    private ImageView imgplayer1;
+    private Label lbCPU2;
     @FXML
-    private ImageView imgCPU;
+    private ImageView imgCPU1;
     @FXML
-    private HBox hbradioButton,hbOpciones;
+    private ImageView imgCPU2;
     @FXML
-    private AnchorPane PaneCustom;
+    private Button btGo;
     @FXML
-    private Button btIniciar;
+    private HBox hbradioButton;
+    @FXML
+    private HBox hbOpciones;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ponerBotones();  
-        seleccionarFicha();
+        ponerBotones();
+        seleccionarFichasJugadores();
     }    
 
     @FXML
-    private void volverInicio(ActionEvent event) {
+    private void ReturnHome(ActionEvent event) {
         Platform.runLater(() -> {
             MenuPrincipalController menuPrincipal = new MenuPrincipalController();
-            Stage stage = (Stage) btHome.getScene().getWindow();
+            Stage stage = (Stage) btReturn.getScene().getWindow();
             menuPrincipal.mostrarMenuPrincipal(stage);
-        });
+        });        
     }
 
     @FXML
-    public void comenzarJuego(ActionEvent event) {
-        
-        if(rdJugador1.isSelected()){
-            player1Begin = true;
-            CPUBegin = false;
-        }else{
-            CPUBegin = true;
-            player1Begin = false;
+    private void Gogame(ActionEvent event) {
+        if (rdCp1.isSelected()) {
+            cp1Begin = true;
+            cp2Begin = false;
+        } else {
+            cp2Begin = true;
+            cp1Begin = false;
         }
-        if(rdCirculo.isSelected()){
-            esCirculo = true;
-        }else{
-            esCirculo = false;
+        
+        if (rdCR.isSelected()) {
+            esO = true;
+        } else {
+            esO = false;
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VsComputador.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CpuVsCpu.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }        
     }
-
+    
     public void ponerBotones() {
 
         ToggleGroup selectInicio = new ToggleGroup();
-        rdCPU.setToggleGroup(selectInicio);
-        rdJugador1.setToggleGroup(selectInicio);
+        rdCp2.setToggleGroup(selectInicio);
+        rdCp1.setToggleGroup(selectInicio);
         
-        hbradioButton.getChildren().addAll(rdJugador1,rdCPU);
+        hbradioButton.getChildren().addAll(rdCp1,rdCp2);
         hbradioButton.setSpacing(20);
         ToggleGroup selectOpcion = new ToggleGroup();
-        rdCirculo.setToggleGroup(selectOpcion);
-        rdCruz.setToggleGroup(selectOpcion);
-        hbOpciones.getChildren().addAll(rdCirculo,rdCruz);
+        rdCR.setToggleGroup(selectOpcion);
+        rdCX.setToggleGroup(selectOpcion);
+        hbOpciones.getChildren().addAll(rdCR,rdCX);
         hbOpciones.setSpacing(65);
-    }
- 
-    public void seleccionarFicha() {
-        rdCirculo.setOnMouseClicked(event -> {
-            if (rdCirculo.isSelected()) {
+    }   
+
+    public void seleccionarFichasJugadores() {
+        rdCR.setOnMouseClicked(event -> {      
+            if (rdCR.isSelected()) {
                 try (FileInputStream input = new FileInputStream("src/main/resources/Images/circulo.png")) {
 
                     Image image = new Image(input, 90, 100, true, false);
-                    imgplayer1.setImage(image);
+                    imgCPU1.setImage(image);
 
                 } catch (IOException exep) {
                     System.out.println("error");
@@ -123,7 +132,7 @@ public class CustomController implements Initializable {
                 try (FileInputStream input = new FileInputStream("src/main/resources/Images/letra-x.png")) {
 
                     Image image = new Image(input, 90, 100, true, false);
-                    imgCPU.setImage(image);
+                    imgCPU2.setImage(image);
 
                 } catch (IOException exep) {
                     System.out.println("error");
@@ -131,12 +140,12 @@ public class CustomController implements Initializable {
             }
 
         });
-        rdCruz.setOnMouseClicked(event -> {
-            if (rdCruz.isSelected()) {
+        rdCX.setOnMouseClicked(event -> {
+            if (rdCX.isSelected()) {
                 try (FileInputStream input = new FileInputStream("src/main/resources/Images/letra-x.png")) {
 
                     Image image = new Image(input, 90, 100, true, false);
-                    imgplayer1.setImage(image);
+                    imgCPU1.setImage(image);
 
                 } catch (IOException exep) {
                     System.out.println("error");
@@ -145,7 +154,7 @@ public class CustomController implements Initializable {
                 try (FileInputStream input = new FileInputStream("src/main/resources/Images/circulo.png")) {
 
                     Image image = new Image(input, 90, 100, true, false);
-                    imgCPU.setImage(image);
+                    imgCPU2.setImage(image);
 
                 } catch (IOException exep) {
                     System.out.println("error");
@@ -153,8 +162,6 @@ public class CustomController implements Initializable {
             }
 
         });
-    }
-
-
-
+    }        
+    
 }

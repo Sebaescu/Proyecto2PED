@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="PaneCustom" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomController">
+<AnchorPane id="AnchorPane" fx:id="PaneCustomHvsH" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomHombreVsHombreController">
    <children>
-      <Button fx:id="btHome" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#volverInicio" text="Menu" />
+      <Button fx:id="btregreso" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#volverInicio" text="Menu" />
       <Label layoutX="272.0" layoutY="270.0" text="VS">
          <font>
             <Font name="Berlin Sans FB Bold" size="48.0" />
@@ -20,14 +20,14 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbcomputador" layoutX="381.0" layoutY="285.0" text="Computador">
+      <Label fx:id="lbcomputador" layoutX="381.0" layoutY="285.0" text="Player 2">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgplayer1" fitHeight="60.0" fitWidth="66.0" layoutX="159.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCPU" fitHeight="60.0" fitWidth="66.0" layoutX="422.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btIniciar" layoutX="275.0" layoutY="364.0" mnemonicParsing="false" onAction="#comenzarJuego" text="Iniciar">
+      <ImageView fx:id="imgP1" fitHeight="60.0" fitWidth="66.0" layoutX="159.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgP2" fitHeight="60.0" fitWidth="66.0" layoutX="393.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btStart" layoutX="275.0" layoutY="364.0" mnemonicParsing="false" onAction="#StartGame" text="Iniciar">
          <font>
             <Font size="14.0" />
          </font>

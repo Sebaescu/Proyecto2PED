@@ -51,9 +51,6 @@ public class MenuPrincipalController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Custom.fxml"));
             Parent root = loader.load();
-
-            // Obtener el controlador del VsComputador.fxml
-            //VsComputadorController vsComputadorController = loader.getController();
             setPrimaryStage(primaryStage);
 
             Scene scene = new Scene(root);
@@ -67,13 +64,9 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void abrirVSjugador(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VsJugador.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomHombreVsHombre.fxml"));
             Parent root = loader.load();
-
-            // Obtener el controlador del VsComputador.fxml
-            //VsComputadorController vsComputadorController = loader.getController();
             setPrimaryStage(primaryStage);
-
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (Exception e) {
@@ -83,7 +76,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void abrirCpuVsCpu(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CpuVsCpu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomMaquinaVsMaquina.fxml"));
             Parent root = loader.load();
 
             setPrimaryStage(primaryStage);
