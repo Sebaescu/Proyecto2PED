@@ -36,7 +36,7 @@ public class VsComputadorController implements Initializable {
     Random random = new Random();
     ArrayList<Button> buttons;
     MinMax ticTacToeAI = new MinMax();
-    public boolean playerTurn = true,deshabilitarBtns = false,isGameOver = false;
+    public boolean playerTurn = true,deshabilitarBtns = false,isGameOver = false,boardFull = false;
 
     @FXML
     private Button button1;
@@ -65,6 +65,8 @@ public class VsComputadorController implements Initializable {
     @FXML
     private Label lbresult;
     @FXML
+    private Label lblRcmd;
+    @FXML
     private TextField txscoreP1;
     @FXML
     private TextField txscoreCPU;
@@ -73,6 +75,7 @@ public class VsComputadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lblRcmd.setVisible(false);
         txscoreP1.setText(String.valueOf(contPlayer1));
         txscoreCPU.setText(String.valueOf(contCPU));
         
@@ -84,6 +87,7 @@ public class VsComputadorController implements Initializable {
         });
         if(CustomController.CPUBegin){
             makeAIMove();
+            recomendarJugada();
         } 
 
     }
@@ -95,12 +99,17 @@ public class VsComputadorController implements Initializable {
             winnerText.setText("");
             deshabilitarBtns = false;
             isGameOver = false;
+            boardFull = false;
+            lblRcmd.setVisible(false);
             pickButton(random.nextInt(9));
+            recomendarJugada();
         } else if (CustomController.player1Begin){
             buttons.forEach(this::resetButton);
             winnerText.setText("");
             deshabilitarBtns = false;
             isGameOver = false;
+            boardFull = false;
+            lblRcmd.setVisible(false);
         }
             
     }
@@ -130,7 +139,7 @@ public class VsComputadorController implements Initializable {
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
                 pause.setOnFinished(event -> {
                     checkIfGameIsOver();
-                    if (!isGameOver) {
+                    if (isGameOver == false) {
                         makeAIMove();
                         checkIfGameIsOver();
                     }
@@ -146,7 +155,7 @@ public class VsComputadorController implements Initializable {
                     PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
                     pause.setOnFinished(event -> {
                         checkIfGameIsOver();
-                        if (!isGameOver) {
+                        if (isGameOver == false) {
                             makeAIMove();
                             checkIfGameIsOver();
                         }
@@ -158,23 +167,24 @@ public class VsComputadorController implements Initializable {
 
     }
     public void makeAIMove(){
-//        if (!isGameOver) {
-//            int move = ticTacToeAI.minMaxDecision(getBoardState());
-//            pickButton(move);
-//        }
+        lblRcmd.setText("");
         int move = ticTacToeAI.minMaxDecision(getBoardState());
         pickButton(move);
+        if(isGameOver == false && boardFull ==false){
+            recomendarJugada();
+        }
     }
 
     //este metodo me elige que signo sera la computadora    
     public void pickButton(int index) {
         if (esCirculo) {
             buttons.get(index).setText("X");
-            buttons.get(index).setDisable(false); // aqui era true, pero le cambie a false
+            buttons.get(index).setDisable(false);
         } else {
             buttons.get(index).setText("O");
-            buttons.get(index).setDisable(false); // aqui era true, pero le cambie a false
+            buttons.get(index).setDisable(false); 
         }
+        checkIfGameIsOver();
     }
 
     public State getBoardState(){
@@ -185,6 +195,12 @@ public class VsComputadorController implements Initializable {
         }
 
         return new State(0,board);
+    }
+    public void recomendarJugada(){
+        int recomendada = ticTacToeAI.minMaxDecision(getBoardState());
+            recomendada++;
+            lblRcmd.setText("Jugada Recomendada: " + recomendada);
+            lblRcmd.setVisible(true);
     }
 
     public void checkIfGameIsOver(){
@@ -203,29 +219,29 @@ public class VsComputadorController implements Initializable {
                 default -> null;
             };
             
-            if (line.equals("XXX") && esCirculo == true) {
-                winnerText.setText("Computadora Gana!");
-                contCPU++;
+             if (line.equals("XXX")) {
+                if(CustomController.esCirculo == true){
+                    winnerText.setText("Computadora Gana!");
+                    contCPU++;
+                }else {
+                    winnerText.setText("Player 1 Gana!");
+                    contPlayer1++;
+                }   
+                isGameOver = true;
                 txscoreCPU.setText(String.valueOf(contCPU));
-                isGameOver = true;
-                deshabilitarBtns = true;              
-            }else if (line.equals("XXX") && esCirculo == false) {
-                winnerText.setText("Player 1 Gana!");
-                contPlayer1++;
                 txscoreP1.setText(String.valueOf(contPlayer1));
-                isGameOver = true;
                 deshabilitarBtns = true;              
-            }else if (line.equals("OOO") && esCirculo == true) {
-                winnerText.setText("Player 1 Gana!");
-                contPlayer1++;
+             }else if (line.equals("OOO")) {
+                if(CustomController.esCirculo == true){
+                    winnerText.setText("Player 1 Gana!");
+                    contPlayer1++;
+                }else{
+                    winnerText.setText("Computadora Gana!");
+                    contCPU++;
+                }
+                isGameOver = true;             
                 txscoreP1.setText(String.valueOf(contPlayer1));
-                isGameOver = true;
-                deshabilitarBtns = true;   
-            }else if (line.equals("OOO") && esCirculo == false) {
-                winnerText.setText("Computadora Gana!");
-                contCPU++;
                 txscoreCPU.setText(String.valueOf(contCPU));
-                isGameOver = true;
                 deshabilitarBtns = true;   
             }
 
@@ -240,18 +256,21 @@ public class VsComputadorController implements Initializable {
             buttons.forEach(button ->{
                 button.setDisable(true);
             });
+            lblRcmd.setVisible(false);
         }
     }
 
     public boolean isBoardFull() {
         for (Button button : buttons) {
             if (button.getText().isEmpty()) {
+                boardFull = false;
                 return false; 
             }
         }
+        boardFull = true;
         return true;
     }
-
+    
 }
 
 //Clase de respaldo

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoVScomputador" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsComputadorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoVScomputador" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsComputadorController">
    <children>
       <FlowPane fx:id="PaneTableroIA" layoutX="67.0" layoutY="130.0" prefHeight="238.0" prefWidth="238.0" stylesheets="@style.css">
          <children>
@@ -137,6 +137,11 @@
       <Label layoutX="482.0" layoutY="270.0" text="VS">
          <font>
             <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblRcmd" layoutX="401.0" layoutY="381.0" prefHeight="60.0" prefWidth="198.0" text="Jugada Recomendada: " textFill="#158408">
+         <font>
+            <Font size="17.0" />
          </font>
       </Label>
    </children>

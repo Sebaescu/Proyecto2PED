@@ -1,11 +1,12 @@
 package tictactoe;
 import TDAs.NaryTree;
 import TDAs.TreeNode;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MinMax {
-    
-    
+
     public int minMaxDecision(State state) {
         NaryTree gameTree = buildGameTree(state);
         TreeNode rootNode = gameTree.getRoot();
@@ -21,36 +22,18 @@ public class MinMax {
             movesList.add(utility);
         }
 
-        int max = movesList.get(0);
-        int bestIndex = 0;
-
-        for (int i = 1; i < movesList.size(); i++) {
-            if (movesList.get(i) > max) {
-                max = movesList.get(i);
-                bestIndex = i;
-            }
-        }
+        int bestIndex = movesList.indexOf(movesList.stream().max(Integer::compareTo).orElseThrow());
 
         return rootNode.getChildren().get(bestIndex).getState().getPosition();
     }
 
     private String getCurrentPlayer(State state) {
-        int xCount = 0;
-        int oCount = 0;
-
-        for (String s : state.getState()) {
-            if ("X".equals(s)) {
-                xCount++;
-            } else if ("O".equals(s)) {
-                oCount++;
-            }
-        }
+        long xCount = Arrays.stream(state.getState()).filter("X"::equals).count();
+        long oCount = Arrays.stream(state.getState()).filter("O"::equals).count();
 
         return (xCount <= oCount) ? "X" : "O";
     }
 
-
-    //Picks best option for the X-player
     public int maxValue(TreeNode node) {
         State state = node.getState();
 
@@ -58,16 +41,9 @@ public class MinMax {
             return utilityOf(state);
         }
 
-        int v = (int) -Double.POSITIVE_INFINITY;
-
-        for (TreeNode child : node.getChildren()) {
-            v = Math.max(v, minValue(child));
-        }
-
-        return v;
+        return node.getChildren().stream().mapToInt(this::minValue).max().orElseThrow();
     }
 
-    //Picks best option for the O-player
     public int minValue(TreeNode node) {
         State state = node.getState();
 
@@ -75,13 +51,7 @@ public class MinMax {
             return utilityOf(state);
         }
 
-        int v = (int) Double.POSITIVE_INFINITY;
-
-        for (TreeNode child : node.getChildren()) {
-            v = Math.min(v, maxValue(child));
-        }
-
-        return v;
+        return node.getChildren().stream().mapToInt(this::maxValue).min().orElseThrow();
     }
 
     public NaryTree buildGameTree(State state) {
@@ -104,47 +74,37 @@ public class MinMax {
         }
     }
 
-    //Returns true if the game is over
     public boolean isTerminal(State state) {
-        int takenSpots = 0;
-        for (int a = 0; a < 9; a++) {
-            if(state.getStateIndex(a).equals("X") || state.getStateIndex(a).equals("O") ){ 
-                takenSpots++;
-            }
+        long takenSpots = Arrays.stream(state.getState()).filter(s -> "X".equals(s) || "O".equals(s)).count();
 
+        if (takenSpots == 9) {
+            return true;
+        }
+
+        for (int a = 0; a < 8; a++) {
             String line = checkState(state, a);
 
-            //Check for Winners
-            if (line.equals("XXX")) {
-                return true;
-            } else if (line.equals("OOO")) {
-                return true;
-            }
-
-            if(takenSpots == 9){
+            if ("XXX".equals(line) || "OOO".equals(line)) {
                 return true;
             }
         }
+
         return false;
     }
 
-    //Returns +1 if X is winner
-    //Return -1 if O is winner
-    //Returns 0 if no one won
-    private int utilityOf(State state){
+    private int utilityOf(State state) {
         for (int a = 0; a < 8; a++) {
             String line = checkState(state, a);
-            //Check for Winners
-            if (line.equals("XXX")) {
+
+            if ("XXX".equals(line)) {
                 return 1;
-            } else if (line.equals("OOO")) {
+            } else if ("OOO".equals(line)) {
                 return -1;
             }
         }
         return 0;
     }
 
-   //Find any win state if it exists
     private String checkState(State state, int a) {
         if (state == null) {
             return "";
@@ -162,40 +122,19 @@ public class MinMax {
         };
     }
 
-    //Returns all possible states form a given state
-    private ArrayList<State> successorsOf(State state){
+    private ArrayList<State> successorsOf(State state) {
         ArrayList<State> possibleMoves = new ArrayList<>();
-        int xMoves = 0;
-        int yMoves = 0;
-        String player;
+        long xMoves = Arrays.stream(state.getState()).filter("X"::equals).count();
+        long oMoves = Arrays.stream(state.getState()).filter("O"::equals).count();
+        String player = (xMoves <= oMoves) ? "X" : "O";
 
-        //Calculate player turn
-        for (String s: state.getState()) {
-            if(s!=null){
-                if (s.equals("X")) {
-                    xMoves++;
-                }else if(s.equals("O")){
-                    yMoves++;
-                }
-            }
-        }
-
-        if(xMoves <= yMoves){
-            player = "X";
-        } else {
-            player = "O";
-        }
-
-        //Create all possible states
         for (int i = 0; i < 9; i++) {
-            String[] newState = state.getState().clone();
-
-            if(newState[i] != "X" && newState[i] != "O"){
+            if (!"X".equals(state.getStateIndex(i)) && !"O".equals(state.getStateIndex(i))) {
+                String[] newState = Arrays.copyOf(state.getState(), state.getState().length);
                 newState[i] = player;
                 possibleMoves.add(new State(i, newState));
             }
         }
         return possibleMoves;
     }
-    
 }
