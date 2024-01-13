@@ -105,7 +105,7 @@ public class CpuVsCpuController implements Initializable {
 
     public void pickButton(int index) {
         buttons.get(index).setText(playerTurn % 2 == 0 ? "X" : "O");
-        buttons.get(index).setDisable(true);
+        buttons.get(index).setDisable(false); // PILAS AQUI LE CAMBIE EL TRUE POR FALSE
     }
 
     public State getBoardState() {
@@ -137,14 +137,12 @@ public class CpuVsCpuController implements Initializable {
                 winnerText.setText("Computadora 1 Gana!");
                 contCPU++;
                 isGameOver = true;
-                txtscoreCPU.setText(String.valueOf(contCPU));
-                txtscoreCPU2.setText(String.valueOf(contCPU2));                
+                txtscoreCPU.setText(String.valueOf(contCPU));               
                 deshabilitarBtns = true;
             } else if (line.equals("OOO")) {
                 winnerText.setText("Computadora 2 Gana!");
                 contCPU2++;
                 isGameOver = true;
-                txtscoreCPU.setText(String.valueOf(contCPU));
                 txtscoreCPU2.setText(String.valueOf(contCPU2));                
                 deshabilitarBtns = true;
             }

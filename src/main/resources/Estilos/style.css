@@ -37,3 +37,74 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
+
+/*
+--------------------------------Fondo para Custom1------------------------------
+*/
+
+.paneCustom1{
+    -fx-background-image: url("mario.gif");
+    -fx-background-size:600px 445px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.botonInicio1 {
+    -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
+    -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
+}
+
+/*
+------------------------------- Fondo para vsComputador ------------------------
+*/
+
+.FondoVScomputador{
+    -fx-background-image: url("Fondo3.jpg");
+    -fx-background-size:650px 482px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+/*
+------------------------------ Fondo para vsJugador ----------------------------
+*/
+.FondoVSjugador{
+    -fx-background-image: url("Fondo3.jpg");
+    -fx-background-size:600px 433px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+/*
+------------------------------ Fondo para Custom2 ------------------------------
+*/
+.FondoCustom2{
+    -fx-background-image: url("mario.gif");
+    -fx-background-size:600px 445px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+.botGo {
+    -fx-background-radius: 20; 
+    -fx-border-radius: 20;     
+}
+/*
+------------------------------ Fondo para Custom3 ------------------------------
+*/
+.FondoCustom3{
+    -fx-background-image: url("mario.gif");
+    -fx-background-size:600px 445px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+.bempezar {
+    -fx-background-radius: 20; 
+    -fx-border-radius: 20;     
+}
+/*
+------------------------------- Fondo para cpuVScpu ----------------------------
+*/
+.FondoCPUvsCPU{
+    -fx-background-image: url("Fondo3.jpg");
+    -fx-background-size:650px 482px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}

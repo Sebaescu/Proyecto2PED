@@ -3,55 +3,140 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsComputadorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoVScomputador" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VsComputadorController">
    <children>
-      <FlowPane fx:id="PaneTableroIA" layoutX="70.0" layoutY="160.0" prefHeight="238.0" prefWidth="238.0" stylesheets="@style.css">
+      <FlowPane fx:id="PaneTableroIA" layoutX="67.0" layoutY="130.0" prefHeight="238.0" prefWidth="238.0" stylesheets="@style.css">
          <children>
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button2" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button4" layoutX="160.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button5" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button6" layoutX="85.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button7" layoutX="160.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button8" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
-            <Button fx:id="button9" layoutX="85.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
+            <Button fx:id="button1" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button2" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button4" layoutX="160.0" layoutY="10.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button5" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button6" layoutX="85.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button7" layoutX="160.0" layoutY="85.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button8" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="button9" layoutX="85.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #FFF99C;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
          </children>
       </FlowPane>
-      <Text fx:id="winnerText" layoutX="497.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="107.54437255859375">
+      <Text fx:id="winnerText" fill="#106ac7" layoutX="472.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="142.74432373046875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="107.0" layoutY="409.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
-      <Button layoutX="209.0" layoutY="408.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="54.0" text="Quit" />
-      <Label fx:id="lbTitulo" layoutX="209.0" layoutY="14.0" text="Tic-Tac-Toe">
+      <Button layoutX="103.0" layoutY="382.0" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-color: #FF8B5C;" text="Restart">
+         <effect>
+            <DropShadow />
+         </effect>
          <font>
-            <Font size="48.0" />
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="212.0" layoutY="381.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #FF8B5C;" text="Quit">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Label fx:id="lbTitulo" layoutX="157.0" layoutY="14.0" text="Tic-Tac-Toe" textFill="#b15ee4">
+         <font>
+            <Font name="Rockwell Bold" size="64.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label fx:id="lbresult" layoutX="394.0" layoutY="121.0" text="Resultado:">
+      <Label fx:id="lbresult" layoutX="370.0" layoutY="116.0" text="Resultado:" textFill="#106ac7">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="394.0" layoutY="232.0" text="Player 1" />
-      <Label layoutX="537.0" layoutY="232.0" text="Computador" />
-      <Label layoutX="463.0" layoutY="182.0" text="Score">
+      <Label layoutX="388.0" layoutY="242.0" text="Player 1" textFill="#ffca00">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-      </Label>
-      <TextField fx:id="txscoreP1" layoutX="394.0" layoutY="261.0" prefHeight="35.0" prefWidth="42.0" />
-      <TextField fx:id="txscoreCPU" layoutX="551.0" layoutY="261.0" prefHeight="35.0" prefWidth="42.0" />
-      <Label layoutX="484.0" layoutY="265.0" text="VS">
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label layoutX="531.0" layoutY="242.0" text="Computador" textFill="#ffb700">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label layoutX="458.0" layoutY="178.0" text="Score" textFill="#f7ff03">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <TextField fx:id="txscoreP1" layoutX="401.0" layoutY="279.0" prefHeight="35.0" prefWidth="42.0" />
+      <TextField fx:id="txscoreCPU" layoutX="563.0" layoutY="279.0" prefHeight="35.0" prefWidth="42.0" />
+      <Label layoutX="482.0" layoutY="270.0" text="VS">
+         <font>
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
    </children>

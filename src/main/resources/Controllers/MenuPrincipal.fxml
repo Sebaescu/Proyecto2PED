@@ -33,11 +33,17 @@
          <font>
             <Font name="ROGFonts-Regular" size="30.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label layoutX="106.0" layoutY="104.0" text="Selecciona una opcion de juego:" textFill="#f2d47d">
+      <Label layoutX="106.0" layoutY="104.0" text="Selecciona una opcion de juego:" textFill="#fbff00">
          <font>
             <Font name="Rockwell Extra Bold" size="20.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
       <Button fx:id="btnCpu" alignment="CENTER" layoutX="250.0" layoutY="266.0" mnemonicParsing="false" onAction="#abrirCpuVsCpu" prefHeight="27.0" prefWidth="135.0" styleClass="CPUvsCPU" stylesheets="@../Estilos/style.css" text="CPU Vs CPU">
          <font>

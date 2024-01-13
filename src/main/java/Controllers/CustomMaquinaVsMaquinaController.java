@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -37,6 +38,7 @@ public class CustomMaquinaVsMaquinaController implements Initializable {
     public static RadioButton rdCp2 = new RadioButton("Maquina 2");
     public static RadioButton rdCR = new RadioButton("Circulo");
     public static RadioButton rdCX = new RadioButton("Cruz");
+    public Font tipoLetter = new Font("Rockwell", 18);
     public static boolean cp1Begin = false, cp2Begin = false;
     public static boolean esO = false;    
 
@@ -107,14 +109,17 @@ public class CustomMaquinaVsMaquinaController implements Initializable {
         ToggleGroup selectInicio = new ToggleGroup();
         rdCp2.setToggleGroup(selectInicio);
         rdCp1.setToggleGroup(selectInicio);
-        
+        rdCp2.setFont(tipoLetter);
+        rdCp1.setFont(tipoLetter);
         hbradioButton.getChildren().addAll(rdCp1,rdCp2);
         hbradioButton.setSpacing(20);
         ToggleGroup selectOpcion = new ToggleGroup();
         rdCR.setToggleGroup(selectOpcion);
         rdCX.setToggleGroup(selectOpcion);
+        rdCR.setFont(tipoLetter);
+        rdCX.setFont(tipoLetter);
         hbOpciones.getChildren().addAll(rdCR,rdCX);
-        hbOpciones.setSpacing(65);
+        hbOpciones.setSpacing(45);
     }   
 
     public void seleccionarFichasJugadores() {

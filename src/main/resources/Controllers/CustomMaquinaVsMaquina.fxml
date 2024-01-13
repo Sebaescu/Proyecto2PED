@@ -2,47 +2,54 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="PaneCustomMvsM" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomMaquinaVsMaquinaController">
+<AnchorPane id="AnchorPane" fx:id="PaneCustomMvsM" prefHeight="445.0" prefWidth="600.0" styleClass="FondoCustom3" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomMaquinaVsMaquinaController">
    <children>
-      <Button fx:id="btReturn" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#ReturnHome" text="Menu" />
-      <Label layoutX="272.0" layoutY="270.0" text="VS">
+      <Button fx:id="btReturn" blendMode="MULTIPLY" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ReturnHome" text="Menu">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Label layoutX="272.0" layoutY="270.0" text="VS" textFill="#9500ff">
          <font>
             <Font name="Berlin Sans FB Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="lbCPU1" layoutX="105.0" layoutY="285.0" text="Maquina 1">
+      <Label fx:id="lbCPU1" layoutX="105.0" layoutY="285.0" text="Maquina 1" textFill="#9500ff">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbCPU2" layoutX="381.0" layoutY="285.0" text="Maquina 2">
+      <Label fx:id="lbCPU2" layoutX="381.0" layoutY="285.0" text="Maquina 2" textFill="#9500ff">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="imgCPU1" fitHeight="60.0" fitWidth="66.0" layoutX="132.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgCPU2" fitHeight="60.0" fitWidth="66.0" layoutX="408.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btGo" layoutX="275.0" layoutY="364.0" mnemonicParsing="false" onAction="#Gogame" text="Iniciar">
+      <ImageView fx:id="imgCPU1" fitHeight="60.0" fitWidth="66.0" layoutX="126.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgCPU2" fitHeight="60.0" fitWidth="66.0" layoutX="408.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btGo" layoutX="262.0" layoutY="365.0" mnemonicParsing="false" onAction="#Gogame" style="-fx-background-color: #77BD58;" styleClass="bempezar" stylesheets="@../Estilos/style.css" text="Iniciar" textFill="#eaeaea">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
-      <Label layoutX="76.0" layoutY="82.0" text="¿Quien Inicia?  :">
+      <HBox fx:id="hbradioButton" alignment="CENTER_LEFT" layoutX="263.0" layoutY="90.0" prefHeight="35.0" prefWidth="289.0" />
+      <HBox fx:id="hbOpciones" layoutX="328.0" layoutY="143.0" prefHeight="35.0" prefWidth="258.0" spacing="65.0" />
+      <Label layoutX="52.0" layoutY="96.0" text="¿Quien Inicia?  :">
          <font>
-            <Font size="18.0" />
+            <Font name="Rockwell Bold" size="24.0" />
          </font>
       </Label>
-      <HBox fx:id="hbradioButton" alignment="CENTER_LEFT" layoutX="249.0" layoutY="78.0" prefHeight="35.0" prefWidth="289.0" />
-      <Label layoutX="75.0" layoutY="129.0" text="¿Cual te gustaria ser?">
+      <Label layoutX="52.0" layoutY="143.0" text="¿Cual te gustaria ser?">
          <font>
-            <Font size="18.0" />
+            <Font name="Rockwell Bold" size="24.0" />
          </font>
       </Label>
-      <HBox fx:id="hbOpciones" layoutX="294.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" spacing="65.0" />
    </children>
 </AnchorPane>

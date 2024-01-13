@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class CustomController implements Initializable {
@@ -32,6 +33,7 @@ public class CustomController implements Initializable {
     public static RadioButton rdCPU = new RadioButton("Computador");
     public static RadioButton rdCirculo = new RadioButton("Circulo");
     public static RadioButton rdCruz = new RadioButton("Cruz");
+    public Font customFont = new Font("Rockwell", 18);
     public static boolean player1Begin = false,CPUBegin = false;
     public static boolean esCirculo = false;
 
@@ -98,14 +100,19 @@ public class CustomController implements Initializable {
         ToggleGroup selectInicio = new ToggleGroup();
         rdCPU.setToggleGroup(selectInicio);
         rdJugador1.setToggleGroup(selectInicio);
+        rdJugador1.setFont(customFont);
+        rdCPU.setFont(customFont);
         
         hbradioButton.getChildren().addAll(rdJugador1,rdCPU);
         hbradioButton.setSpacing(20);
         ToggleGroup selectOpcion = new ToggleGroup();
         rdCirculo.setToggleGroup(selectOpcion);
         rdCruz.setToggleGroup(selectOpcion);
+        rdCirculo.setFont(customFont);
+        rdCruz.setFont(customFont);
+                
         hbOpciones.getChildren().addAll(rdCirculo,rdCruz);
-        hbOpciones.setSpacing(65);
+        hbOpciones.setSpacing(45);
     }
  
     public void seleccionarFicha() {

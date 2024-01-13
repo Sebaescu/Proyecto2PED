@@ -29,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -42,6 +43,7 @@ public class CustomHombreVsHombreController implements Initializable {
     public static RadioButton rdPl2 = new RadioButton("Player 2");
     public static RadioButton rd0 = new RadioButton("Circulo");
     public static RadioButton rdX = new RadioButton("Cruz");
+    public Font personalizar = new Font("Rockwell", 18);
     public static boolean pl1Begin = false, pl2Begin = false;
     public static boolean esCircle = false;
 
@@ -112,14 +114,20 @@ public class CustomHombreVsHombreController implements Initializable {
         ToggleGroup selectInicio = new ToggleGroup();
         rdPl2.setToggleGroup(selectInicio);
         rdPl1.setToggleGroup(selectInicio);
+        rdPl1.setFont(personalizar);
+        rdPl2.setFont(personalizar);
         
         hbradioButton.getChildren().addAll(rdPl1,rdPl2);
         hbradioButton.setSpacing(20);
         ToggleGroup selectOpcion = new ToggleGroup();
         rd0.setToggleGroup(selectOpcion);
         rdX.setToggleGroup(selectOpcion);
+        rd0.setFont(personalizar);
+        rdX.setFont(personalizar);
+        
         hbOpciones.getChildren().addAll(rd0,rdX);
-        hbOpciones.setSpacing(65);
+        hbOpciones.setSpacing(45);
+        
     }  
     
     public void selectIcon() {

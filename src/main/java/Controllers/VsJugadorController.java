@@ -24,6 +24,8 @@ import javafx.stage.Stage;
  * @author Abeni
  */
 public class VsJugadorController implements Initializable {
+    
+    public boolean isGameOver = false;
 
     @FXML
     private Button button1;
@@ -58,6 +60,7 @@ public class VsJugadorController implements Initializable {
     private boolean gameWon = false;
     int contP1 = 0;
     int contP2 = 0;
+    public boolean deshabilitarBtns = false;
     ArrayList<Button> buttons;
     @FXML
     private Label lbjugador1;
@@ -65,6 +68,10 @@ public class VsJugadorController implements Initializable {
     private Label lbjugador2;
     @FXML
     private TextField txscoreP1,txscoreP2;
+    @FXML
+    private Label lbTitulo;
+    @FXML
+    private Label lbresult;
 
 
     @Override
@@ -83,7 +90,9 @@ public class VsJugadorController implements Initializable {
     @FXML
     void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
-        winnerText.setText("Tic-Tac-Toe");
+        winnerText.setText("");
+        gameWon = false;  
+        deshabilitarBtns = false;
     }
 
     public void resetButton(Button button){
@@ -99,22 +108,27 @@ public class VsJugadorController implements Initializable {
             menuPrincipal.mostrarMenuPrincipal(stage);
         });
     }
-    private void setupButton(Button button) {
+    public void setupButton(Button button) {
         button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-            button.setDisable(true);
-            checkIfGameIsOver();
-        });
+            if (!gameWon && !deshabilitarBtns) {
+                setPlayerSymbol(button);
+                button.setDisable(false); // pilas aqui yo le puse false en lugar de true
+                checkIfGameIsOver();
+            }
+        });        
     }
 
     public void setPlayerSymbol(Button button){
-        if(playerTurn % 2 == 0){
-            button.setText("X");
-            playerTurn = 1;
-        } else{
-            button.setText("O");
-            playerTurn = 0;
-        }
+        if (!gameWon && !deshabilitarBtns) {
+            if (playerTurn % 2 == 0) {
+                button.setText("X");
+                playerTurn = 1;
+            } else {
+                button.setText("O");
+                playerTurn = 0;
+            }
+        }        
+
     }
 
     public void checkIfGameIsOver(){
@@ -134,7 +148,7 @@ public class VsJugadorController implements Initializable {
             //X winner
             if (line.equals("XXX")) {
                 gameWon = true;
-                winnerText.setText("X won!");
+                winnerText.setText("Player 1 Gano!!");
                 contP1++;
                 txscoreP1.setText(String.valueOf(contP1));
             }
@@ -142,18 +156,32 @@ public class VsJugadorController implements Initializable {
             //O winner
             else if (line.equals("OOO")) {
                 gameWon = true;
-                winnerText.setText("O won!");
+                winnerText.setText("Player 2 Gano!!");
                 contP2++;
                 txscoreP2.setText(String.valueOf(contP2));
             }
-            // Verificar empate
-            if (gameWon == false && allButtonsDisabled()) {
-                winnerText.setText("Empate!");
-            }
+
+        }
+        
+        //verificar empate
+        if ((isGameOver == false) && (isBoardFull())) {
+            winnerText.setText("Empate");
         }
     }
-    private boolean allButtonsDisabled() {
+
+    public boolean isBoardFull() {
+        for (Button button : buttons) {
+            if (button.getText().isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean allButtonsDisabled() {
         return buttons.stream().allMatch(button -> button.isDisabled());
     }
-    
+
+
+
 }
