@@ -5,37 +5,38 @@
 package TDAs;
 
 import java.util.ArrayList;
+import java.util.List;
 import tictactoe.State;
 
 public class TreeNode {
 
     private State state;
-    
-    private ArrayList<TreeNode> children;
+    private List<TreeNode> children;
+    private int value;
 
     public TreeNode(State state) {
         this.state = state;
         this.children = new ArrayList<>();
-    }
-
-    public void addChild(TreeNode child) {
-        children.add(child);
+        this.value = 0;
     }
 
     public State getState() {
         return state;
     }
 
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public ArrayList<TreeNode> getChildren() {
+    public List<TreeNode> getChildren() {
         return children;
     }
 
-    public void setChildren(ArrayList<TreeNode> children) {
-        this.children = children;
+    public void addChild(TreeNode child) {
+        children.add(child);
     }
-    
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

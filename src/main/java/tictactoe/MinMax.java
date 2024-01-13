@@ -1,140 +1,141 @@
 package tictactoe;
-import TDAs.NaryTree;
-import TDAs.TreeNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class MinMax {
+    private static final int WIN_SCORE = 10;
+    private static final int DRAW_SCORE = 0;
+    private static final int LOSS_SCORE = -10;
 
     public int minMaxDecision(State state) {
-        NaryTree gameTree = buildGameTree(state);
-        TreeNode rootNode = gameTree.getRoot();
-
-        ArrayList<TreeNode> possibleMoves = rootNode.getChildren();
-        ArrayList<Integer> movesList = new ArrayList<>();
-
-        String player = getCurrentPlayer(state);
-
-        for (TreeNode node : possibleMoves) {
-            State nextState = node.getState();
-            int utility = (player.equals("X")) ? maxValue(node) : minValue(node);
-            movesList.add(utility);
+        int winningMove = findWinningMove(state);
+        if (winningMove != -1) {
+            return winningMove;
         }
 
-        int bestIndex = movesList.indexOf(movesList.stream().max(Integer::compareTo).orElseThrow());
-
-        return rootNode.getChildren().get(bestIndex).getState().getPosition();
-    }
-
-    private String getCurrentPlayer(State state) {
-        long xCount = Arrays.stream(state.getState()).filter("X"::equals).count();
-        long oCount = Arrays.stream(state.getState()).filter("O"::equals).count();
-
-        return (xCount <= oCount) ? "X" : "O";
-    }
-
-    public int maxValue(TreeNode node) {
-        State state = node.getState();
-
-        if (isTerminal(state)) {
-            return utilityOf(state);
+        int blockingMove = findBlockingMove(state);
+        if (blockingMove != -1) {
+            return blockingMove;
         }
 
-        return node.getChildren().stream().mapToInt(this::minValue).max().orElseThrow();
+        return findBestMove(state);
     }
 
-    public int minValue(TreeNode node) {
-        State state = node.getState();
-
-        if (isTerminal(state)) {
-            return utilityOf(state);
-        }
-
-        return node.getChildren().stream().mapToInt(this::maxValue).min().orElseThrow();
-    }
-
-    public NaryTree buildGameTree(State state) {
-        NaryTree gameTree = new NaryTree(state);
-        buildTreeRecursively(gameTree.getRoot());
-        return gameTree;
-    }
-
-    public void buildTreeRecursively(TreeNode node) {
-        State state = node.getState();
-
-        if (!isTerminal(state)) {
-            ArrayList<State> successors = successorsOf(state);
-
-            for (State successor : successors) {
-                TreeNode childNode = new TreeNode(successor);
-                node.addChild(childNode);
-                buildTreeRecursively(childNode);
+    private int findWinningMove(State state) {
+        List<Integer> availableMoves = getAvailableMoves(state);
+        for (int move : availableMoves) {
+            State nextState = applyMove(state, Integer.toString(move), "X");
+            if (nextState.checkWin("X")) {
+                return move;
             }
         }
+        return -1;
+    }
+
+    private int findBlockingMove(State state) {
+        List<Integer> availableMoves = getAvailableMoves(state);
+        for (int move : availableMoves) {
+            State nextState = applyMove(state, Integer.toString(move), "O");
+            if (nextState.checkWin("O")) {
+                return move;
+            }
+        }
+        return -1;
+    }
+
+    private int findBestMove(State state) {
+        int bestMove = -1;
+        int bestScore = Integer.MIN_VALUE;
+
+        List<Integer> availableMoves = getAvailableMoves(state);
+
+        for (int move : availableMoves) {
+            State nextState = applyMove(state, Integer.toString(move), "X");
+            int score = minMove(nextState);
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMove = move;
+            }
+        }
+
+        return bestMove;
+    }
+
+    private int maxMove(State state) {
+        if (isTerminal(state)) {
+            return evaluate(state);
+        }
+
+        int bestScore = Integer.MIN_VALUE;
+
+        List<Integer> availableMoves = getAvailableMoves(state);
+
+        for (int move : availableMoves) {
+            State nextState = applyMove(state, Integer.toString(move), "X");
+            int score = minMove(nextState);
+
+            bestScore = Math.max(bestScore, score);
+        }
+
+        return bestScore;
+    }
+
+    private int minMove(State state) {
+        if (isTerminal(state)) {
+            return evaluate(state);
+        }
+
+        int bestScore = Integer.MAX_VALUE;
+
+        List<Integer> availableMoves = getAvailableMoves(state);
+
+        for (int move : availableMoves) {
+            State nextState = applyMove(state, Integer.toString(move), "O");
+            int score = maxMove(nextState);
+
+            bestScore = Math.min(bestScore, score);
+        }
+
+        return bestScore;
     }
 
     public boolean isTerminal(State state) {
-        long takenSpots = Arrays.stream(state.getState()).filter(s -> "X".equals(s) || "O".equals(s)).count();
+        return state.isGameOver() || state.isBoardFull();
+    }
 
-        if (takenSpots == 9) {
-            return true;
+    private int evaluate(State state) {
+        if (state.checkWin("X")) {
+            return LOSS_SCORE;
+        } else if (state.checkWin("O")) {
+            return WIN_SCORE;
+        } else {
+            return DRAW_SCORE;
         }
+    }
 
-        for (int a = 0; a < 8; a++) {
-            String line = checkState(state, a);
+    private List<Integer> getAvailableMoves(State state) {
+        List<Integer> availableMoves = new ArrayList<>();
 
-            if ("XXX".equals(line) || "OOO".equals(line)) {
-                return true;
+        for (int i = 0; i < state.getBoard().length; i++) {
+            if (state.getBoard()[i].isEmpty()) {
+                availableMoves.add(i);
             }
         }
 
-        return false;
+        return availableMoves;
     }
 
-    private int utilityOf(State state) {
-        for (int a = 0; a < 8; a++) {
-            String line = checkState(state, a);
+    private State applyMove(State state, String move, String player) {
+        State newState = new State(0, state.getBoard().clone());
 
-            if ("XXX".equals(line)) {
-                return 1;
-            } else if ("OOO".equals(line)) {
-                return -1;
-            }
+        int index = Integer.parseInt(move);
+
+        if (index >= 0 && index < newState.getBoard().length && newState.getBoard()[index].isEmpty()) {
+            newState.getBoard()[index] = player;
         }
-        return 0;
-    }
 
-    private String checkState(State state, int a) {
-        if (state == null) {
-            return "";
-        }
-        return switch (a) {
-            case 0 -> state.getStateIndex(0) + state.getStateIndex(1) + state.getStateIndex(2);
-            case 1 -> state.getStateIndex(3) + state.getStateIndex(4) + state.getStateIndex(5);
-            case 2 -> state.getStateIndex(6) + state.getStateIndex(7) + state.getStateIndex(8);
-            case 3 -> state.getStateIndex(0) + state.getStateIndex(3) + state.getStateIndex(6);
-            case 4 -> state.getStateIndex(1) + state.getStateIndex(4) + state.getStateIndex(7);
-            case 5 -> state.getStateIndex(2) + state.getStateIndex(5) + state.getStateIndex(8);
-            case 6 -> state.getStateIndex(0) + state.getStateIndex(4) + state.getStateIndex(8);
-            case 7 -> state.getStateIndex(2) + state.getStateIndex(4) + state.getStateIndex(6);
-            default -> "";
-        };
-    }
-
-    private ArrayList<State> successorsOf(State state) {
-        ArrayList<State> possibleMoves = new ArrayList<>();
-        long xMoves = Arrays.stream(state.getState()).filter("X"::equals).count();
-        long oMoves = Arrays.stream(state.getState()).filter("O"::equals).count();
-        String player = (xMoves <= oMoves) ? "X" : "O";
-
-        for (int i = 0; i < 9; i++) {
-            if (!"X".equals(state.getStateIndex(i)) && !"O".equals(state.getStateIndex(i))) {
-                String[] newState = Arrays.copyOf(state.getState(), state.getState().length);
-                newState[i] = player;
-                possibleMoves.add(new State(i, newState));
-            }
-        }
-        return possibleMoves;
+        return newState;
     }
 }

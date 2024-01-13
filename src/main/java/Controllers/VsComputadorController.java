@@ -1,11 +1,6 @@
 package Controllers;
 
 import static Controllers.CustomController.esCirculo;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Toolkit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 
 public class VsComputadorController implements Initializable {
@@ -133,7 +126,7 @@ public class VsComputadorController implements Initializable {
         if (esCirculo) {
             button.setOnMouseClicked(mouseEvent -> {
                 button.setText("O");
-                button.setDisable(false);// aqui era true, pero yo le cambie a false
+                button.setDisable(true);
 
                 // Agrega un retraso antes de que la computadora realice su movimiento
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
@@ -151,7 +144,7 @@ public class VsComputadorController implements Initializable {
         } else {
             button.setOnMouseClicked(mouseEvent -> {
                     button.setText("X");
-                    button.setDisable(false);// aqui era true, pero yo le cambie a false
+                    button.setDisable(true);
                     PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
                     pause.setOnFinished(event -> {
                         checkIfGameIsOver();
@@ -177,14 +170,15 @@ public class VsComputadorController implements Initializable {
 
     //este metodo me elige que signo sera la computadora    
     public void pickButton(int index) {
-        if (esCirculo) {
-            buttons.get(index).setText("X");
-            buttons.get(index).setDisable(false);
-        } else {
-            buttons.get(index).setText("O");
-            buttons.get(index).setDisable(false); 
+        if (index >= 0 && index < buttons.size()) {
+            if (esCirculo) {
+                buttons.get(index).setText("X");
+                buttons.get(index).setDisable(true);
+            } else {
+                buttons.get(index).setText("O");
+                buttons.get(index).setDisable(true); 
+            }
         }
-        checkIfGameIsOver();
     }
 
     public State getBoardState(){
