@@ -78,7 +78,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void abrirCpuVsCpu(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomMaquinaVsMaquina.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CpuVsCpu.fxml"));
             Parent root = loader.load();
 
             setPrimaryStage(primaryStage);

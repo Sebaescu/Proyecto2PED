@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoCPUvsCPU" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CpuVsCpuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoCPUvsCPU" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CpuVsCpuController">
    <children>
       <FlowPane fx:id="PaneTableroIA" layoutX="68.0" layoutY="146.0" prefHeight="238.0" prefWidth="238.0" stylesheets="@style.css">
          <children>
@@ -139,5 +139,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="labelJugador" layoutX="117.0" layoutY="119.0" text="Label" />
    </children>
 </AnchorPane>

@@ -1,12 +1,5 @@
 package Controllers;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
-import static java.lang.Math.random;
-import static java.lang.StrictMath.random;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +23,7 @@ public class CpuVsCpuController implements Initializable {
     private int playerTurn = 0;
     int contCPU2 = 0;
     int contCPU = 0;
+    private int startingComputer = 1;
     ArrayList<Button> buttons;
     MinMax ticTacToeAI = new MinMax();
     public boolean deshabilitarBtns = false, isGameOver = false;
@@ -62,6 +56,8 @@ public class CpuVsCpuController implements Initializable {
     private Label lbTitulo;
     @FXML
     private Label lbresult;
+    @FXML
+    private Label labelJugador;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,10 +67,14 @@ public class CpuVsCpuController implements Initializable {
         buttons.forEach(button -> button.setFocusTraversable(false));
 
         // Inicia el juego entre la computadora y la computadora
-
+        updateLabelJugadorText(); // Método para actualizar el texto del label
         makeAIMove();
         txtscoreCPU.setText(String.valueOf(contCPU));
         txtscoreCPU2.setText(String.valueOf(contCPU2));
+    }
+    
+    private void updateLabelJugadorText() {
+        labelJugador.setText("Inicia la partida la Maquina " + startingComputer);
     }
 
     public void makeAIMove() {
@@ -122,6 +122,7 @@ public class CpuVsCpuController implements Initializable {
 
     public void checkIfGameIsOver() {
         String line = null;
+        boolean gameOver = false;
         for (int a = 0; a < 8; a++) {
             line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -139,24 +140,36 @@ public class CpuVsCpuController implements Initializable {
                 winnerText.setText("Computadora 1 Gana!");
                 contCPU++;
                 isGameOver = true;
+                gameOver = true;
                 txtscoreCPU.setText(String.valueOf(contCPU));               
                 deshabilitarBtns = true;
             } else if (line.equals("OOO")) {
                 winnerText.setText("Computadora 2 Gana!");
                 contCPU2++;
                 isGameOver = true;
+                gameOver = true;
                 txtscoreCPU2.setText(String.valueOf(contCPU2));                
                 deshabilitarBtns = true;
             }
-            if(isGameOver == false && isBoardFull()){
-                winnerText.setText("Empate");
-                deshabilitarBtns = true;
-            }
+//            if(isGameOver == false && isBoardFull()){
+//                winnerText.setText("Empate");
+//                deshabilitarBtns = true;
+//            }
+        }
+        
+        if (!gameOver && isBoardFull()) {
+        winnerText.setText("Empate");
+        isGameOver = true;
         }
 
-        if (deshabilitarBtns) {
+        if (isGameOver) {
+            deshabilitarBtns = true;
             buttons.forEach(button -> button.setDisable(true));
         }
+
+//        if (deshabilitarBtns) {
+//            buttons.forEach(button -> button.setDisable(true));
+//        }
     }
 
     public boolean isBoardFull() {
@@ -174,6 +187,9 @@ public class CpuVsCpuController implements Initializable {
         winnerText.setText("Tic-Tac-Toe");
         deshabilitarBtns = false;
         isGameOver = false;
+        // Cambia la computadora que inicia en cada reinicio del juego
+        startingComputer = 3 - startingComputer; // Alternar entre 1 y 2
+        updateLabelJugadorText();
         makeAIMove(); // Agregar esta línea para iniciar el juego entre ambas CPUs
     }
 
