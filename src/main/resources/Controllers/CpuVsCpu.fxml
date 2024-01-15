@@ -3,13 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoCPUvsCPU" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CpuVsCpuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="650.0" styleClass="FondoCPUvsCPU" stylesheets="@../Estilos/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CpuVsCpuController">
    <children>
       <FlowPane fx:id="PaneTableroIA" layoutX="68.0" layoutY="146.0" prefHeight="238.0" prefWidth="238.0" stylesheets="@style.css">
          <children>
@@ -111,24 +112,17 @@
          <effect>
             <DropShadow />
          </effect></Label>
-      <TextField fx:id="txtscoreCPU" layoutX="385.0" layoutY="312.0" prefHeight="35.0" prefWidth="42.0" />
-      <TextField fx:id="txtscoreCPU2" layoutX="554.0" layoutY="312.0" prefHeight="35.0" prefWidth="42.0" />
-      <Label layoutX="475.0" layoutY="303.0" text="VS">
+      <TextField fx:id="txtscoreCPU" alignment="CENTER" layoutX="385.0" layoutY="312.0" prefHeight="35.0" prefWidth="42.0">
          <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
+            <Font name="System Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="txtscoreCPU2" alignment="CENTER" layoutX="554.0" layoutY="312.0" prefHeight="35.0" prefWidth="42.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></TextField>
       <Label fx:id="lbTitulo" layoutX="145.0" layoutY="23.0" text="Tic-Tac-Toe" textFill="#b15ee4">
          <font>
             <Font name="Rockwell Bold" size="64.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Label>
-      <Label layoutX="450.0" layoutY="194.0" text="Score" textFill="#f7ff03">
-         <font>
-            <Font name="System Bold" size="36.0" />
          </font>
          <effect>
             <DropShadow />
@@ -139,6 +133,29 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="labelJugador" layoutX="117.0" layoutY="119.0" text="Label" />
+      <Label fx:id="labelJugador" alignment="CENTER" layoutX="68.0" layoutY="101.0" prefHeight="26.0" prefWidth="228.0" text="Label">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="443.0" layoutY="210.0" text="Score" textFill="#f7ff03">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Bloom threshold="0.0" />
+               </input>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="468.0" layoutY="303.0" text="VS" textFill="#ffb700">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -97,10 +98,6 @@
          <effect>
             <DropShadow />
          </effect></Label>
-      <Label layoutX="451.0" layoutY="269.0" text="VS">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font></Label>
       <Label fx:id="lbjugador2" layoutX="507.0" layoutY="227.0" text="Player 2" textFill="#ffca00">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -115,8 +112,14 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <TextField fx:id="txscoreP1" layoutX="383.0" layoutY="277.0" prefHeight="38.0" prefWidth="38.0" />
-      <TextField fx:id="txscoreP2" layoutX="518.0" layoutY="277.0" prefHeight="38.0" prefWidth="38.0" />
+      <TextField fx:id="txscoreP1" alignment="CENTER" layoutX="383.0" layoutY="277.0" prefHeight="38.0" prefWidth="38.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="txscoreP2" alignment="CENTER" layoutX="518.0" layoutY="277.0" prefHeight="38.0" prefWidth="38.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></TextField>
       <Label fx:id="lbTitulo" layoutX="127.0" layoutY="14.0" text="Tic-Tac-Toe" textFill="#b15ee4">
          <font>
             <Font name="Rockwell Bold" size="64.0" />
@@ -130,12 +133,24 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="421.0" layoutY="163.0" text="Score" textFill="#f7ff03">
+      <Label layoutX="445.0" layoutY="269.0" text="VS" textFill="#ffb700">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
          <effect>
-            <DropShadow />
+            <Bloom threshold="0.0" />
+         </effect>
+      </Label>
+      <Label layoutX="420.0" layoutY="163.0" text="Score" textFill="#f7ff03">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Bloom threshold="0.0" />
+               </input>
+            </DropShadow>
          </effect>
       </Label>
    </children>

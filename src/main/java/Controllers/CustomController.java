@@ -57,9 +57,14 @@ public class CustomController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ponerBotones();  
+        ponerBotones();
+        rdJugador1.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rdCPU.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rdCirculo.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rdCruz.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
         seleccionarFicha();
-    }    
+        
+    } 
 
     @FXML
     private void volverInicio(ActionEvent event) {

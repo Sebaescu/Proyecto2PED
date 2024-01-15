@@ -72,6 +72,11 @@ public class CustomHombreVsHombreController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ponerBotones();
+        rdPl1.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rdPl2.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rd0.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        rdX.setStyle("-fx-text-fill: #00EDD0; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 2, 0, 0, 1);");
+        
         selectIcon();
     }    
 

@@ -43,7 +43,7 @@
 */
 
 .paneCustom1{
-    -fx-background-image: url("mario.gif");
+    -fx-background-image: url("gravityFondo.gif");
     -fx-background-size:600px 445px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
@@ -53,6 +53,11 @@
     -fx-background-radius: 20; /* Ajusta el radio según sea necesario */
     -fx-border-radius: 20; /* Ajusta el radio según sea necesario */    
 }
+
+.radio-button .text {
+    -fx-text-fill: black; /* Color predeterminado del texto */
+}
+
 
 /*
 ------------------------------- Fondo para vsComputador ------------------------
@@ -77,7 +82,7 @@
 ------------------------------ Fondo para Custom2 ------------------------------
 */
 .FondoCustom2{
-    -fx-background-image: url("mario.gif");
+    -fx-background-image: url("gravityFondo.gif");
     -fx-background-size:600px 445px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
