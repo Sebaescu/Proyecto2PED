@@ -51,3 +51,60 @@ public class State {
         return false;
     }
 }
+
+
+/*
+//Clase de Respaldo con la version Anterior del algoritmo
+
+public class State {
+    private int position;
+    private String[] state;
+
+    public State(int position, String[] state) {
+        this.position = position;
+        this.state = state;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String[] getState() {
+        return state;
+    }
+
+    public String getStateIndex(int i) {
+        return state[i];
+    }
+
+    public void setState(String[] state) {
+        this.state = state;
+    }
+
+    public void changeState(int i, String player) {
+        state[i] = player;
+    }
+
+    public boolean isEmptyBoard() {
+        for (String s : state) {
+            if (s != null && !s.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "position=" + position +
+                ", state=" + Arrays.toString(state) +
+                '}';
+    }
+}
+
+*/

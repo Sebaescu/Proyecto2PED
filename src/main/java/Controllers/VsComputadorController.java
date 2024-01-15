@@ -266,9 +266,11 @@ public class VsComputadorController implements Initializable {
     
 }
 
-//Clase de respaldo
 
 /*
+//Clase de Respaldo con la version Anterior del algoritmo
+
+
 public class VsComputadorController implements Initializable {
     
     int contPlayer1 = 0;
@@ -332,17 +334,17 @@ public class VsComputadorController implements Initializable {
     void restartGame(ActionEvent event) {
         if (CustomController.CPUBegin) {
             buttons.forEach(this::resetButton);
-            winnerText.setText("Tic-Tac-Toe");
+            winnerText.setText("");
             deshabilitarBtns = false;
             isGameOver = false;
             pickButton(random.nextInt(9));
         } else if (CustomController.player1Begin){
             buttons.forEach(this::resetButton);
-            winnerText.setText("Tic-Tac-Toe");
+            winnerText.setText("");
             deshabilitarBtns = false;
             isGameOver = false;
         }
-         
+            
     }
 
 
@@ -353,41 +355,68 @@ public class VsComputadorController implements Initializable {
     @FXML
     private void volverAlMenu() {
         Platform.runLater(() -> {
-            // Crea una nueva instancia del MainMenu y muestra la ventana maximizada
             MenuPrincipalController menuPrincipal = new MenuPrincipalController();
             Stage stage = (Stage) button1.getScene().getWindow();
             menuPrincipal.mostrarMenuPrincipal(stage);
         });
     }
+    
+    // este metodo me permite elegir que signo soy yo
+    public void setupButton(Button button) {
+        if (esCirculo) {
+            button.setOnMouseClicked(mouseEvent -> {
+                button.setText("O");
+                button.setDisable(false);// aqui era true, pero yo le cambie a false
 
-    private void setupButton(Button button) {
-        button.setOnMouseClicked(mouseEvent -> {
-            button.setText("O");
-            button.setDisable(true);
+                // Agrega un retraso antes de que la computadora realice su movimiento
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
+                pause.setOnFinished(event -> {
+                    checkIfGameIsOver();
+                    if (!isGameOver) {
+                        makeAIMove();
+                        checkIfGameIsOver();
+                    }
 
-            // Agrega un retraso antes de que la computadora realice su movimiento
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
-            pause.setOnFinished(event -> {
-                checkIfGameIsOver(); 
-                if(!isGameOver){
-                    makeAIMove();
-                    checkIfGameIsOver(); 
-                }
-                       
+                });
+                pause.play();
             });
-            pause.play();
-        });
-    }
 
+        } else {
+            button.setOnMouseClicked(mouseEvent -> {
+                    button.setText("X");
+                    button.setDisable(false);// aqui era true, pero yo le cambie a false
+                    PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
+                    pause.setOnFinished(event -> {
+                        checkIfGameIsOver();
+                        if (!isGameOver) {
+                            makeAIMove();
+                            checkIfGameIsOver();
+                        }
+
+                    });
+                    pause.play();
+                });
+            }
+
+    }
     public void makeAIMove(){
-        
+//        if (!isGameOver) {
+//            int move = ticTacToeAI.minMaxDecision(getBoardState());
+//            pickButton(move);
+//        }
         int move = ticTacToeAI.minMaxDecision(getBoardState());
         pickButton(move);
     }
 
+    //este metodo me elige que signo sera la computadora    
     public void pickButton(int index) {
-        buttons.get(index).setText("X");
-        buttons.get(index).setDisable(true);
+        if (esCirculo) {
+            buttons.get(index).setText("X");
+            buttons.get(index).setDisable(false); // aqui era true, pero le cambie a false
+        } else {
+            buttons.get(index).setText("O");
+            buttons.get(index).setDisable(false); // aqui era true, pero le cambie a false
+        }
     }
 
     public State getBoardState(){
@@ -402,6 +431,7 @@ public class VsComputadorController implements Initializable {
 
     public void checkIfGameIsOver(){
         String line = null;
+        
         for (int a = 0; a < 8; a++) {
             line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -414,25 +444,35 @@ public class VsComputadorController implements Initializable {
                 case 7 -> button3.getText() + button6.getText() + button9.getText();
                 default -> null;
             };
-
-            if (line.equals("XXX")) {
+            
+            if (line.equals("XXX") && esCirculo == true) {
                 winnerText.setText("Computadora Gana!");
                 contCPU++;
                 txscoreCPU.setText(String.valueOf(contCPU));
                 isGameOver = true;
                 deshabilitarBtns = true;              
-            }
-
-            else if (line.equals("OOO")) {
+            }else if (line.equals("XXX") && esCirculo == false) {
+                winnerText.setText("Player 1 Gana!");
+                contPlayer1++;
+                txscoreP1.setText(String.valueOf(contPlayer1));
+                isGameOver = true;
+                deshabilitarBtns = true;              
+            }else if (line.equals("OOO") && esCirculo == true) {
                 winnerText.setText("Player 1 Gana!");
                 contPlayer1++;
                 txscoreP1.setText(String.valueOf(contPlayer1));
                 isGameOver = true;
                 deshabilitarBtns = true;   
+            }else if (line.equals("OOO") && esCirculo == false) {
+                winnerText.setText("Computadora Gana!");
+                contCPU++;
+                txscoreCPU.setText(String.valueOf(contCPU));
+                isGameOver = true;
+                deshabilitarBtns = true;   
             }
 
         }
-        
+
         if ((isGameOver == false) && (isBoardFull())){
             winnerText.setText("Empate");
         }
@@ -453,6 +493,7 @@ public class VsComputadorController implements Initializable {
         }
         return true;
     }
+
 }
 */
 
