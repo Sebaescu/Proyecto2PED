@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -14,12 +15,11 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuPrincipal.fxml"));
         Parent root = loader.load();
         
-        // Obtener el controlador del Main.fxml
         MenuPrincipalController menuController = loader.getController();
         menuController.setPrimaryStage(primaryStage);
-
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Tic-Tac-Tou");
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image("file:Logo/Imagen2.jpg"));        
         primaryStage.show();
     }
 
@@ -28,18 +28,3 @@ public class Main extends Application {
     }
 }
 
-//public class Main extends Application {
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("VsComputador.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root));
-//        primaryStage.show();
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//}
